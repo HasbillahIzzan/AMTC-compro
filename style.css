@@ -156,7 +156,7 @@
   }
 
   .btn-kontak {
-    background: var(--brand2);
+    background: var(--brand);
     color: #fff;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
@@ -234,7 +234,7 @@
     align-items: center;
     gap: 0.8rem;
     font-weight: 700;
-    letter-spacing: 0.2px;
+
   }
 
   .brand-mark {
@@ -253,9 +253,23 @@
   }
 
   .brand-name {
-    font-family: "Montserrat";
+    font-family: "The Seasons";
     font-weight: 500;
+    font-size: 1.4rem;
     color: var(--muted);
+  }
+
+  .brand-subname {
+    font-family: "Montserrat";
+    font-weight: 110;
+    font-size: 0.84rem;
+    color: var(--muted);
+  }
+
+  .brand-container {
+    display: flex;
+    flex-direction: column; 
+    line-height: 1; 
   }
 
   .site-nav {
@@ -281,6 +295,7 @@
     text-decoration: none;
     color: inherit;
     transition: color 0.3s ease;
+    font-weight: 500;
   }
 
   .site-nav ul a::after {
@@ -787,14 +802,9 @@
     }
   }
 
-  /* About */
+  /* Tentang */
   .about {
-    background-color: var(--accent);
-  }
-
-  .about-copy h2 {
-    font-family: The Seasons;
-    font-size: 28px;
+   background: url("AMTC - ASSET BG/Pattern 1.png");
   }
 
   .about-copy p {
@@ -813,6 +823,46 @@
     border-radius: var(--radius);
     overflow: hidden;
     box-shadow: var(--shadow-md);
+  }
+
+  .about-copy-t1 {
+    font-weight: 700; 
+    font-family: The Seasons;
+    font-size: 1rem; 
+    color: var(--text-dark, #2b2b2b); 
+    display: inline-block; 
+    padding: 8px 16px; 
+    background-color: var(--accent2); 
+    border-radius: 6px;
+    margin-bottom: 0.5rem;
+  }
+
+  .about-copy-t2 {
+    font-weight: 500; 
+    font-size: 2rem; 
+    letter-spacing: 0.1rem;
+    margin-top: 0;
+  }
+
+  .t1-wrapper {
+    display: flex; 
+    align-items: center; 
+    gap: 8px; 
+    width: fit-content; 
+    line-height: normal; 
+    margin-bottom: 0.5rem; 
+  }
+
+  .icon-about {
+    width: 32px; 
+    height: 32px; 
+    object-fit: contain; 
+    margin-top: 6px;
+    margin-left: 7px;
+  }
+
+  .container-about-head { 
+    line-height: 1; 
   }
 
   .slide-from-left {
@@ -884,6 +934,12 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+  }
+
+  .paket-icon {
+    width: 30px; 
+    height: 30px; 
+    object-fit: contain; 
   }
 
   @media (min-width: 700px) {
@@ -984,7 +1040,7 @@
     border-radius: var(--radius);
     padding: 1rem;
     box-shadow: var(--shadow-md);
-    font-family: sans-serif;
+    font-family: 'Montserrat';
   }
 
   .booking-form h3 {
