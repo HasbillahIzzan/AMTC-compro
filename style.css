@@ -232,7 +232,6 @@
   .brand {
     display: inline-flex;
     align-items: center;
-    gap: 0.8rem;
     font-weight: 700;
 
   }
@@ -829,7 +828,7 @@
     font-weight: 700; 
     font-family: The Seasons;
     font-size: 1rem; 
-    color: var(--text-dark, #2b2b2b); 
+    color: #2b2b2b; 
     display: inline-block; 
     padding: 8px 16px; 
     background-color: var(--accent2); 
