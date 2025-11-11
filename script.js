@@ -188,14 +188,81 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ===================================
-  // 7. Hero Slider Initialization
+  // 7. Tombol "Lihat Selengkapnya" (Page Fasilitas)
+  // ===================================
+  const showMoreBtn = document.getElementById('show-more-btn');
+  const hiddenItems = document.querySelectorAll('.wahana-card.hidden-item');
+
+  if (showMoreBtn) {
+    showMoreBtn.addEventListener('click', function() {
+      const isVisible = this.getAttribute('data-visible') === 'true';
+
+      if (!isVisible) {
+        hiddenItems.forEach(item => {
+          item.style.display = 'flex'; // atau 'grid' sesuai layout kamu
+        });
+        this.innerHTML = 'Tutup <i class="fa-solid fa-arrow-up-long"></i>';
+        this.setAttribute('data-visible', 'true');
+      } else {
+        hiddenItems.forEach(item => {
+          item.style.display = 'none';
+        });
+        this.innerHTML = 'Lihat Selengkapnya <i class="fa-solid fa-arrow-down-long"></i>';
+        this.setAttribute('data-visible', 'false');
+      }
+    });
+  }
+
+  // ===================================
+  // 8. Hero Slider Initialization
   // ===================================
   // Inisialisasi HeroSlider
   new HeroSlider();
+
+  // ===================================
+  // 9. Zoomed Image Lightbox (galeri)
+  // ===================================
+  const zoomButtons = document.querySelectorAll('.zoom-btn');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxClose = document.querySelector('.lightbox-close');
+
+    // 1. Fungsi untuk membuka Lightbox
+    zoomButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.stopPropagation(); 
+            const imgSrc = this.getAttribute('data-img-src');
+            lightboxImg.src = imgSrc;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden'; 
+        });
+    });
+
+    // 2. Fungsi untuk menutup Lightbox (klik tombol X)
+    lightboxClose.addEventListener('click', function() {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+    });
+
+    // 3. Fungsi untuk menutup Lightbox (klik di luar gambar)
+    lightbox.addEventListener('click', function(e) {
+        if (e.target === lightbox) {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
+
+    // 4. Fungsi untuk menutup Lightbox (tekan tombol ESC)
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
 });
 
 // ===================================
-// 8. Hero Slider Class Definition
+// 10. Hero Slider Class Definition
 // ===================================
 class HeroSlider {
   constructor() {
