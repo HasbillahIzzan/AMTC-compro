@@ -190,25 +190,26 @@ document.addEventListener("DOMContentLoaded", () => {
   // ===================================
   // 7. Tombol "Lihat Selengkapnya" (Page Fasilitas)
   // ===================================
-  const showMoreBtn = document.getElementById('show-more-btn');
-  const hiddenItems = document.querySelectorAll('.wahana-card.hidden-item');
+  const showMoreBtn = document.getElementById("show-more-btn");
+  const hiddenItems = document.querySelectorAll(".wahana-card.hidden-item");
 
   if (showMoreBtn) {
-    showMoreBtn.addEventListener('click', function() {
-      const isVisible = this.getAttribute('data-visible') === 'true';
+    showMoreBtn.addEventListener("click", function () {
+      const isVisible = this.getAttribute("data-visible") === "true";
 
       if (!isVisible) {
-        hiddenItems.forEach(item => {
-          item.style.display = 'flex'; // atau 'grid' sesuai layout kamu
+        hiddenItems.forEach((item) => {
+          item.style.display = "flex"; // atau 'grid' sesuai layout kamu
         });
         this.innerHTML = 'Tutup <i class="fa-solid fa-arrow-up-long"></i>';
-        this.setAttribute('data-visible', 'true');
+        this.setAttribute("data-visible", "true");
       } else {
-        hiddenItems.forEach(item => {
-          item.style.display = 'none';
+        hiddenItems.forEach((item) => {
+          item.style.display = "none";
         });
-        this.innerHTML = 'Lihat Selengkapnya <i class="fa-solid fa-arrow-down-long"></i>';
-        this.setAttribute('data-visible', 'false');
+        this.innerHTML =
+          'Lihat Selengkapnya <i class="fa-solid fa-arrow-down-long"></i>';
+        this.setAttribute("data-visible", "false");
       }
     });
   }
@@ -222,43 +223,77 @@ document.addEventListener("DOMContentLoaded", () => {
   // ===================================
   // 9. Zoomed Image Lightbox (galeri)
   // ===================================
-  const zoomButtons = document.querySelectorAll('.zoom-btn');
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
-    const lightboxClose = document.querySelector('.lightbox-close');
+  const zoomButtons = document.querySelectorAll(".zoom-btn");
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImg = document.getElementById("lightbox-img");
+  const lightboxClose = document.querySelector(".lightbox-close");
 
-    // 1. Fungsi untuk membuka Lightbox
-    zoomButtons.forEach(button => {
-        button.addEventListener('click', function(e) {
-            e.stopPropagation(); 
-            const imgSrc = this.getAttribute('data-img-src');
-            lightboxImg.src = imgSrc;
-            lightbox.classList.add('active');
-            document.body.style.overflow = 'hidden'; 
-        });
+  // 1. Fungsi untuk membuka Lightbox
+  zoomButtons.forEach((button) => {
+    button.addEventListener("click", function (e) {
+      e.stopPropagation();
+      const imgSrc = this.getAttribute("data-img-src");
+      lightboxImg.src = imgSrc;
+      lightbox.classList.add("active");
+      document.body.style.overflow = "hidden";
     });
+  });
 
-    // 2. Fungsi untuk menutup Lightbox (klik tombol X)
-    lightboxClose.addEventListener('click', function() {
-        lightbox.classList.remove('active');
-        document.body.style.overflow = '';
-    });
+  // 2. Fungsi untuk menutup Lightbox (klik tombol X)
+  lightboxClose.addEventListener("click", function () {
+    lightbox.classList.remove("active");
+    document.body.style.overflow = "";
+  });
 
-    // 3. Fungsi untuk menutup Lightbox (klik di luar gambar)
-    lightbox.addEventListener('click', function(e) {
-        if (e.target === lightbox) {
-            lightbox.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-    });
+  // 3. Fungsi untuk menutup Lightbox (klik di luar gambar)
+  lightbox.addEventListener("click", function (e) {
+    if (e.target === lightbox) {
+      lightbox.classList.remove("active");
+      document.body.style.overflow = "";
+    }
+  });
 
-    // 4. Fungsi untuk menutup Lightbox (tekan tombol ESC)
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && lightbox.classList.contains('active')) {
-            lightbox.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-    });
+  // 4. Fungsi untuk menutup Lightbox (tekan tombol ESC)
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && lightbox.classList.contains("active")) {
+      lightbox.classList.remove("active");
+      document.body.style.overflow = "";
+    }
+  });
+  // ===================================
+  // 9. slide (galeri)
+  // ===================================
+  const track = document.querySelector(".slider-track");
+  const slides = Array.from(track.children);
+  const slideCount = slides.length;
+
+  // duplikat semua gambar biar bisa loop tanpa jeda
+  slides.forEach((slide) => {
+    const clone = slide.cloneNode(true);
+    track.appendChild(clone);
+  });
+
+  let currentIndex = 0;
+  const slidesPerView = 4; // jumlah gambar yang kelihatan sekaligus
+  const slideWidth = track.children[0].getBoundingClientRect().width + 16; // + margin
+
+  function moveSlide() {
+    currentIndex++;
+    track.style.transition = "transform 0.8s ease-in-out";
+    track.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
+
+    // kalau sudah sampai akhir batch pertama, reset halus
+    if (currentIndex >= slideCount) {
+      setTimeout(() => {
+        track.style.transition = "none";
+        track.style.transform = "translateX(0)";
+        currentIndex = 0;
+      }, 900); // setelah animasi selesai
+    }
+  }
+
+  // jalan otomatis tiap 3 detik
+  setInterval(moveSlide, 5000);
 });
 
 // ===================================
