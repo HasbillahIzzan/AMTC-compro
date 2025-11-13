@@ -260,8 +260,77 @@ document.addEventListener("DOMContentLoaded", () => {
       document.body.style.overflow = "";
     }
   });
+
+// =====================================================
+// 10. Testimonial Slider (auto infinite tanpa flash)  // masih error
+// =====================================================
+// Testimonial Slider Responsive
+const testimonialTrack = document.querySelector(".testimonial-track");
+const testimonialContainer = document.querySelector(".testimonial-slider");
+const testimonialGap = 16;
+let testimonialCurrentIndex = 0;
+let testimonialSlidesPerView = 3;
+
+// Ambil semua slide asli
+let testimonialSlides = Array.from(testimonialTrack.children);
+
+// Duplicate untuk infinite loop
+testimonialSlides.forEach(slide => {
+  const clone = slide.cloneNode(true);
+  testimonialTrack.appendChild(clone);
+});
+
+testimonialSlides = Array.from(testimonialTrack.children); // update array
+
+// Update slidesPerView sesuai layar
+function updateSlidesPerView() {
+  const width = window.innerWidth;
+  if (width <= 768) testimonialSlidesPerView = 1;
+  else if (width <= 1024) testimonialSlidesPerView = 2;
+  else testimonialSlidesPerView = 3;
+
+  // Reset posisi slider saat resize
+  testimonialCurrentIndex = 0;
+  testimonialTrack.style.transition = "none";
+  testimonialTrack.style.transform = "translateX(0)";
+}
+
+updateSlidesPerView();
+window.addEventListener("resize", updateSlidesPerView);
+
+// Hitung lebar per card
+function getCardWidth() {
+  return testimonialContainer.clientWidth / testimonialSlidesPerView - ((testimonialGap * (testimonialSlidesPerView - 1)) / testimonialSlidesPerView);
+}
+
+// Geser slide
+function moveSlide() {
+  const cardWidth = getCardWidth();
+  testimonialCurrentIndex++;
+  testimonialTrack.style.transition = "transform 0.8s ease-in-out";
+  testimonialTrack.style.transform = `translateX(-${(cardWidth + testimonialGap) * testimonialCurrentIndex}px)`;
+
+  if (testimonialCurrentIndex >= testimonialSlides.length / 2) {
+    setTimeout(() => {
+      testimonialTrack.style.transition = "none";
+      testimonialTrack.style.transform = "translateX(0)";
+      testimonialCurrentIndex = 0;
+    }, 900);
+  }
+}
+
+// Auto play
+let sliderInterval = setInterval(moveSlide, 4000);
+
+// Pause saat hover / touch
+testimonialContainer.addEventListener("mouseenter", () => clearInterval(sliderInterval));
+testimonialContainer.addEventListener("mouseleave", () => sliderInterval = setInterval(moveSlide, 4000));
+testimonialContainer.addEventListener("touchstart", () => clearInterval(sliderInterval));
+testimonialContainer.addEventListener("touchend", () => sliderInterval = setInterval(moveSlide, 4000));
+
+
   // ===================================
-  // 9. slide (galeri)
+  // 11. slide (galeri)
   // ===================================
   const track = document.querySelector(".slider-track");
   const slides = Array.from(track.children);
@@ -297,7 +366,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // ===================================
-// 10. Hero Slider Class Definition
+// 12. Hero Slider Class Definition
 // ===================================
 class HeroSlider {
   constructor() {
