@@ -1,227 +1,331 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Fasilitas</title>
-    <meta name="description"
-    content="Belajar Manasik Haji & Umrah dengan cara yang nyata dan berkesan di AMTC: replika Ka'bah, Sa'i, Jamarat, Arafah, dan fasilitas lengkap." />
+    <meta
+      name="description"
+      content="Belajar Manasik Haji & Umrah dengan cara yang nyata dan berkesan di AMTC: replika Ka'bah, Sa'i, Jamarat, Arafah, dan fasilitas lengkap."
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
-     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <!--Font Awesome (icon) & Font External-->
-    <script src="https://kit.fontawesome.com/f5586eae9e.js" crossorigin="anonymous"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&family=The+Seasons&display=swap"rel="stylesheet">
+    <script
+      src="https://kit.fontawesome.com/f5586eae9e.js"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&family=The+Seasons&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="./style.css" />
-</head>
-<body>
+    <!-- AOS -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  </head>
+  <body>
+<div id="preloader-wrapper">
+    <div class="loader"></div>
+  </div>
     <header class="site-header" aria-label="Navigasi utama">
-    <div class="container header-inner">
-      <a href="#hero" class="brand" aria-label="Halaman utama AMTC">
-        <span class="brand-mark"><img src="AMTC - ASSETS\Logo 1.png" alt="Logo" /></span>
-        <div class="brand-container">
-          <span class="brand-name">AYO MANASIK</span>
-          <span class="brand-subname">AMTC teras lembang</span>
-        </div>
-      </a>
-
-      <button class="nav-toggle" aria-label="Buka navigasi" aria-controls="site-nav" aria-expanded="false">
-        <span class="nav-bar"></span>
-        <span class="nav-bar"></span>
-        <span class="nav-bar"></span>
-      </button>
-      <!---navbar--->
-      <nav id="site-nav" class="site-nav" aria-label="Menu">
-        <ul>
-          <li><a href="beranda.html">Beranda</a></li>  
-          <li><a href="#tentang">Tentang</a></li>
-          <li><a href="fasilitas.html">Fasilitas</a></li>
-          <li><a href="galeri.html">Galeri</a></li>
-          <li><a href="Paket.html">Paket</a></li>
-          <li><a href="Promo.html">Promo</a></li>
-
-        </ul>
-        <a class="btn btn-kontak" href="#kontak">kontak</a>
-      </nav>
-    </div>
-  </header>
-  <!--Banners-->
-  <section class="page-banner-fasilitas" id="fasilitas-banner">
-    <div class="container hero-content-fasilitas">
-        <h1 class="hero-banner-title-fasilitas">Fasilitas</h1>
-        <div class="page-banner-fasilitas-breadcrumbs">
-            <a href="beranda.html">Beranda</a> 
-            <span class="separator"> > </span> 
-            <a href="fasilitas.html" class="current-page-link-fasilitas">Fasilitas</a>
-        </div>
-    </div>
-</section>
-<!--- Wahana dan Fasilitas --->
-<section class="section wahana-aktifitas" id="wahana">
-    <div class="container">
-        <div class="section-head-wahana">
-            <img src="AMTC - ASSET BG/Ornamnet 1.png" alt="pattern dekoratif" class="wahana-dekorasi">
-            <h2 class="text-balance-Wahana">Wahana dan Fasilitas</h2>
-        </div>
-        
-        <div class="wahana-grid">
-            <div class="wahana-card">
-                <div class="card-media">
-                    <img src="Fasilitas/Replika Kaaba.png" alt="Replika Ka'bah AMTC">
-                    <div class="card-icon-overlay">
-                        <i class="fa-solid fa-mosque"></i>
-                    </div>
-                </div>
-                <h3>Replika Ka'abah</h3>
-                <p>Dibuat dengan ukuran 1 : 2 menyerupai aslinya 6 m2, dilengkapi beberapa fitur yakni; Maqam Ibrahim,  Hijr Ismail, Hajar Aswad, Mizabur Rahman dan lampu hijau sebagai tanda memulai tawaf </p>
-            </div>
-
-            <div class="wahana-card">
-                <div class="card-media">
-                    <img src="Fasilitas/Masjid Daarul Aulia.png" alt="Replika Ka'bah Area Tawaf">
-                    <div class="card-icon-overlay">
-                        <i class="fa-solid fa-circle-h"></i>
-                    </div>
-                </div>
-                <h3>Masjid Darul Aulia</h3>
-                <p>Didesain megah dan menenangkan, dilengkapi fasilitas modern yang menghadirkan pengalaman beribadah khusyuk dan nyaman, seolah berada di tengah keindahan alam Lembang.</p>
-            </div>
-            
-            <div class="wahana-card">
-                <div class="card-media">
-                    <img src="Fasilitas/The Caliph Immersive Space.png" alt="The Caliph Immersive Space">
-                    <div class="card-icon-overlay">
-                        <i class="fa-solid fa-sun"></i>
-                    </div>
-                </div>
-                <h3>The Caliph Immersive Space</h3>
-                <p>Wahana wisata religi dengan sajian konten - konten edutainment islam menggunakan teknologi dan platform terkini untuk meningkatkan ketertarikan terhadap pembelajaran AlQuran dan Sunnah</p>
-            </div>
-            
-            <div class="wahana-card">
-                <div class="card-media">
-                    <img src="Fasilitas/Al Sinema.png" alt="Al Sinema Theatre">
-                    <div class="card-icon-overlay">
-                        <i class="fa-solid fa-film"></i>
-                    </div>
-                </div>
-                <h3>Al Cinema Theatre</h3>
-                <p>Alsinema, theater serbaguna dengan luasan menampung 220 pengunjung.</p>
-            </div>
-            
-            <div class="wahana-card">
-                <div class="card-media">
-                    <img src="Fasilitas/Replika Tenda Mina & Arafah.png" alt="Replika Tenda Mina & Arafah">
-                    <div class="card-icon-overlay">
-                        <i class="fa-solid fa-mountain"></i>
-                    </div>
-                </div>
-                <h3>Replika Tenda Mina & Arafah</h3>
-                <p>Fasilitas yang dibuat menyerupai suasana tenda di Mina dan Arafah, sebagai sarana edukasi manasik haji dan umrah. </p>
-            </div>
-            
-            <div class="wahana-card">
-                <div class="card-media">
-                    <img src="Fasilitas/Replikas SAI.png" alt="Replika SAI">
-                    <div class="card-icon-overlay">
-                        <i class="fa-solid fa-bag-shopping"></i>
-                    </div>
-                </div>
-                <h3>Replika SAI</h3>
-                <p>Dibuat dengan ukuran 1 : 10 menyerupai aslinya dengan jarak 45 m2 dari bukit ke bukit, dilengkapi beberapa fitur seperti; Replika Bukit Safa dan marwa lampu hijau dan lainnya.</p>
-            </div>
-            
-            <div class="wahana-card hidden-item">
-                <div class="card-media">
-                    <img src="Fasilitas/Food Hall.png" alt="Food Hall">
-                    <div class="card-icon-overlay">
-                        <i class="fa-solid fa-utensils"></i>
-                    </div>
-                </div>
-                <h3>Food Hall</h3>
-                <p>Pusat jajanan dan makanan halal dengan berbagai pilihan kuliner. Tempat ideal untuk beristirahat dan mengisi energi setelah aktifitas manasik yang padat.</p>
-            </div>
-
-            <div class="wahana-card hidden-item">
-                <div class="card-media">
-                    <img src="Fasilitas/Hall.png" alt="Hall">
-                    <div class="card-icon-overlay">
-                        <i class="fa-solid fa-mug-hot"></i>
-                    </div>
-                </div>
-                <h3>Hall</h3>
-                <p>Tempat yang nyaman untuk menikmati kopi atau teh sambil bersantai. Desain interior yang tenang cocok untuk sekadar berbincang santai.</p>
-            </div>
-            <div class="wahana-card hidden-item">
-                <div class="card-media">
-                    <img src="Fasilitas/Training Room.png" alt="Training Room">
-                    <div class="card-icon-overlay">
-                        <i class="fa-solid fa-panorama"></i>
-                    </div>
-                </div>
-                <h3>Ruang Pelatihan</h3>
-                <p>Dibuat semewah dan senyaman mungkin dengan dilengkapi fasilitas multimedia canggih dan mampu menampung hingga 100 orang.</p>
-            </div>
-            <div class="wahana-card hidden-item">
-                <div class="card-media">
-                    <img src="Fasilitas/Replika Jamarat.png" alt="Replika Jamarat">
-                    <div class="card-icon-overlay">
-                        <i class="fa-solid fa-circle-h"></i>
-                    </div>
-                </div>
-                <h3>Replika Jamarat</h3>
-                <p>Merupakan salah satu syarat wajib dalam peragaan manasik khususnya haji dan dibuat eksklusif dengan 3 pilar megah.</p>
-            </div>
-            <div class="wahana-card hidden-item">
-                <div class="card-media">
-                    <img src="Fasilitas/Souvenir Shop.png" alt="Souvenir Shop">
-                    <div class="card-icon-overlay">
-                        <i class="fa-solid fa-circle-h"></i>
-                    </div>
-                </div>
-                <h3>Souvenir Shop</h3>
-                <p>Menyediakan beragam oleh-oleh khas Lembang dan merchandise eksklusif AMTC. Dirancang modern dan nyaman, menjadi tempat sempurna untuk membawa pulang kenangan dari setiap kunjungan.</p>
-            </div>
-            
+      <div class="container header-inner">
+        <a href="#hero" class="brand" aria-label="Halaman utama AMTC">
+          <span class="brand-mark"
+            ><img src="AMTC - ASSETS\Logo 1.png" alt="Logo"
+          /></span>
+          <div class="brand-container">
+            <span class="brand-name">AYO MANASIK</span>
+            <span class="brand-subname">AMTC teras lembang</span>
           </div>
-        <div class="section-cta wahana-cta">
-            <button class="btn btn-outline" id="show-more-btn" data-visible="false">
-                Lihat Selengkapnya <i class="fa-solid fa-arrow-down-long"></i>
-            </button>
-        </div>
-    </div>
-</section> 
+        </a>
 
- <!-- ============================
+        <button
+          class="nav-toggle"
+          aria-label="Buka navigasi"
+          aria-controls="site-nav"
+          aria-expanded="false"
+        >
+          <span class="nav-bar"></span>
+          <span class="nav-bar"></span>
+          <span class="nav-bar"></span>
+        </button>
+        <!---navbar--->
+        <nav id="site-nav" class="site-nav" aria-label="Menu">
+          <ul>
+            <li><a href="beranda.html">Beranda</a></li>
+            <li><a href="#tentang">Tentang</a></li>
+            <li><a href="fasilitas.html">Fasilitas</a></li>
+            <li><a href="galeri.html">Galeri</a></li>
+            <li><a href="Paket.html">Paket</a></li>
+            <li><a href="Promo.html">Promo</a></li>
+          </ul>
+          <a class="btn btn-kontak" href="#kontak">kontak</a>
+        </nav>
+      </div>
+    </header>
+    <!--Banners-->
+    <section class="page-banner-fasilitas" id="fasilitas-banner">
+      <div class="container hero-content-fasilitas">
+        <h1 class="hero-banner-title-fasilitas">Fasilitas</h1>
+        <div class="page-banner-fasilitas-breadcrumbs" >
+          <a href="beranda.html">Beranda</a>
+          <span class="separator"> > </span>
+          <a href="fasilitas.html" class="current-page-link-fasilitas" 
+            >Fasilitas</a
+          >
+        </div>
+      </div>
+    </section>
+    <!--- Wahana dan Fasilitas --->
+    <section class="section wahana-aktifitas" id="wahana">
+      <div class="container">
+        <div class="section-head-wahana" data-aos="fade-up" data-aos-duration="1500">
+          <img
+            src="AMTC - ASSET BG/Ornamnet 1.png"
+            alt="pattern dekoratif"
+            class="wahana-dekorasi"
+          />
+          <h2 class="text-balance-Wahana">Wahana dan Fasilitas</h2>
+        </div>
+
+        <div class="wahana-grid">
+          <div class="wahana-card" data-aos="fade-up" data-aos-duration="1500">
+            <div class="card-media">
+              <img
+                src="Fasilitas/Replika Kaaba.png"
+                alt="Replika Ka'bah AMTC"
+              />
+              <div class="card-icon-overlay">
+                <i class="fa-solid fa-mosque"></i>
+              </div>
+            </div>
+            <h3>Replika Ka'abah</h3>
+            <p>
+              Dibuat dengan ukuran 1 : 2 menyerupai aslinya 6 m2, dilengkapi
+              beberapa fitur yakni; Maqam Ibrahim, Hijr Ismail, Hajar Aswad,
+              Mizabur Rahman dan lampu hijau sebagai tanda memulai tawaf
+            </p>
+          </div>
+
+          <div class="wahana-card" data-aos="fade-up" data-aos-duration="1600">
+            <div class="card-media">
+              <img
+                src="Fasilitas/Masjid Daarul Aulia.png"
+                alt="Replika Ka'bah Area Tawaf"
+              />
+              <div class="card-icon-overlay">
+                <i class="fa-solid fa-circle-h"></i>
+              </div>
+            </div>
+            <h3>Masjid Darul Aulia</h3>
+            <p>
+              Didesain megah dan menenangkan, dilengkapi fasilitas modern yang
+              menghadirkan pengalaman beribadah khusyuk dan nyaman, seolah
+              berada di tengah keindahan alam Lembang.
+            </p>
+          </div>
+
+          <div class="wahana-card" data-aos="fade-up" data-aos-duration="1700">
+            <div class="card-media">
+              <img
+                src="Fasilitas/The Caliph Immersive Space.png"
+                alt="The Caliph Immersive Space"
+              />
+              <div class="card-icon-overlay">
+                <i class="fa-solid fa-sun"></i>
+              </div>
+            </div>
+            <h3>The Caliph Immersive Space</h3>
+            <p>
+              Wahana wisata religi dengan sajian konten - konten edutainment
+              islam menggunakan teknologi dan platform terkini untuk
+              meningkatkan ketertarikan terhadap pembelajaran AlQuran dan Sunnah
+            </p>
+          </div>
+
+          <div class="wahana-card" data-aos="fade-up" data-aos-duration="1500">
+            <div class="card-media">
+              <img src="Fasilitas/Al Sinema.png" alt="Al Sinema Theatre" />
+              <div class="card-icon-overlay">
+                <i class="fa-solid fa-film"></i>
+              </div>
+            </div>
+            <h3>Al Cinema Theatre</h3>
+            <p>
+              Alsinema, theater serbaguna dengan luasan menampung 220
+              pengunjung.
+            </p>
+          </div>
+
+          <div class="wahana-card" data-aos="fade-up" data-aos-duration="1600">
+            <div class="card-media">
+              <img
+                src="Fasilitas/Replika Tenda Mina & Arafah.png"
+                alt="Replika Tenda Mina & Arafah"
+              />
+              <div class="card-icon-overlay">
+                <i class="fa-solid fa-mountain"></i>
+              </div>
+            </div>
+            <h3>Replika Tenda Mina & Arafah</h3>
+            <p>
+              Fasilitas yang dibuat menyerupai suasana tenda di Mina dan Arafah,
+              sebagai sarana edukasi manasik haji dan umrah.
+            </p>
+          </div>
+
+          <div class="wahana-card" data-aos="fade-up" data-aos-duration="1700">
+            <div class="card-media">
+              <img src="Fasilitas/Replikas SAI.png" alt="Replika SAI" />
+              <div class="card-icon-overlay">
+                <i class="fa-solid fa-bag-shopping"></i>
+              </div>
+            </div>
+            <h3>Replika SAI</h3>
+            <p>
+              Dibuat dengan ukuran 1 : 10 menyerupai aslinya dengan jarak 45 m2
+              dari bukit ke bukit, dilengkapi beberapa fitur seperti; Replika
+              Bukit Safa dan marwa lampu hijau dan lainnya.
+            </p>
+          </div>
+
+          <div class="wahana-card hidden-item">
+            <div class="card-media">
+              <img src="Fasilitas/Food Hall.png" alt="Food Hall" />
+              <div class="card-icon-overlay">
+                <i class="fa-solid fa-utensils"></i>
+              </div>
+            </div>
+            <h3>Food Hall</h3>
+            <p>
+              Pusat jajanan dan makanan halal dengan berbagai pilihan kuliner.
+              Tempat ideal untuk beristirahat dan mengisi energi setelah
+              aktifitas manasik yang padat.
+            </p>
+          </div>
+
+          <div class="wahana-card hidden-item" >
+            <div class="card-media">
+              <img src="Fasilitas/Hall.png" alt="Hall" />
+              <div class="card-icon-overlay">
+                <i class="fa-solid fa-mug-hot"></i>
+              </div>
+            </div>
+            <h3>Hall</h3>
+            <p>
+              Tempat yang nyaman untuk menikmati kopi atau teh sambil bersantai.
+              Desain interior yang tenang cocok untuk sekadar berbincang santai.
+            </p>
+          </div>
+          <div class="wahana-card hidden-item" data-aos="fade-up" data-aos-duration="1500">
+            <div class="card-media">
+              <img src="Fasilitas/Training Room.png" alt="Training Room" />
+              <div class="card-icon-overlay">
+                <i class="fa-solid fa-panorama"></i>
+              </div>
+            </div>
+            <h3>Ruang Pelatihan</h3>
+            <p>
+              Dibuat semewah dan senyaman mungkin dengan dilengkapi fasilitas
+              multimedia canggih dan mampu menampung hingga 100 orang.
+            </p>
+          </div>
+          <div class="wahana-card hidden-item" >
+            <div class="card-media">
+              <img src="Fasilitas/Replika Jamarat.png" alt="Replika Jamarat" />
+              <div class="card-icon-overlay">
+                <i class="fa-solid fa-circle-h"></i>
+              </div>
+            </div>
+            <h3>Replika Jamarat</h3>
+            <p>
+              Merupakan salah satu syarat wajib dalam peragaan manasik khususnya
+              haji dan dibuat eksklusif dengan 3 pilar megah.
+            </p>
+          </div>
+          <div class="wahana-card hidden-item">
+            <div class="card-media">
+              <img src="Fasilitas/Souvenir Shop.png" alt="Souvenir Shop" />
+              <div class="card-icon-overlay">
+                <i class="fa-solid fa-circle-h"></i>
+              </div>
+            </div>
+            <h3>Souvenir Shop</h3>
+            <p>
+              Menyediakan beragam oleh-oleh khas Lembang dan merchandise
+              eksklusif AMTC. Dirancang modern dan nyaman, menjadi tempat
+              sempurna untuk membawa pulang kenangan dari setiap kunjungan.
+            </p>
+          </div>
+        </div>
+        <div class="section-cta wahana-cta" data-aos="fade-up" data-aos-duration="1000">
+          <button
+            class="btn btn-outline"
+            id="show-more-btn"
+            data-visible="false"
+          >
+            Lihat Selengkapnya <i class="fa-solid fa-arrow-down-long" ></i>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================
                 FOOTER SECTION 
             ============================= -->
 
-  <footer id="kontak" class="site-footer">
-    <div class="container footer-grid">
-      <div class="footer-brand">
-        <a href="#hero" class="brand-footer">
-          <span class="brand-mark-footer"><img src="AMTC - ASSETS/Logo 1.png" alt="Logo" /></span>
-          <div class="brand-container">
-          <span class="brand-name">AYO MANASIK</span>
-          <span class="brand-subname">AMTC teras lembang</span>
-        </div>
-        </a>
-        <p class="desc-foot">Pusat Pelatihan Manasik Haji & Umrah Terlengkap.</p>
-        <div class="footer-alamat">
-          <a><strong>Alamat :</strong> Jl. Raya Tangkuban Parahu, Cibogo, Kec. Lembang, Kabupaten Bandung Barat, Jawa Barat 403911</a>
-        </div>
-        <div class="social-icons">
-          <a href="mailto:info@amtclembang.co.id" target="_blank" aria-label="Email" class="tooltip-container" data-tooltip="Email">
+    <footer id="kontak" class="site-footer">
+      <div class="container footer-grid">
+        <div class="footer-brand">
+          <a href="#hero" class="brand-footer">
+            <span class="brand-mark-footer"
+              ><img src="AMTC - ASSETS/Logo 1.png" alt="Logo"
+            /></span>
+            <div class="brand-container">
+              <span class="brand-name">AYO MANASIK</span>
+              <span class="brand-subname">AMTC teras lembang</span>
+            </div>
+          </a>
+          <p class="desc-foot">
+            Pusat Pelatihan Manasik Haji & Umrah Terlengkap.
+          </p>
+          <div class="footer-alamat">
+            <a
+              ><strong>Alamat :</strong> Jl. Raya Tangkuban Parahu, Cibogo, Kec.
+              Lembang, Kabupaten Bandung Barat, Jawa Barat 403911</a
+            >
+          </div>
+          <div class="social-icons">
+            <a
+              href="mailto:info@amtclembang.co.id"
+              target="_blank"
+              aria-label="Email"
+              class="tooltip-container"
+              data-tooltip="Email"
+            >
               <i class="fa-solid fa-envelope"></i>
-          </a>
-          <a href="https://www.instagram.com/ayomanasik.amtclembang" target="_blank" aria-label="Instagram" class="tooltip-container" data-tooltip="Instagram">
+            </a>
+            <a
+              href="https://www.instagram.com/ayomanasik.amtclembang"
+              target="_blank"
+              aria-label="Instagram"
+              class="tooltip-container"
+              data-tooltip="Instagram"
+            >
               <i class="fa-brands fa-instagram"></i>
-          </a>
-          <a href="https://maps.google.com/?q=5JQH%2BVPM%20Cibogo%20Lembang" target="_blank" aria-label="Lokasi" class="tooltip-container" data-tooltip="Lokasi">
+            </a>
+            <a
+              href="https://maps.google.com/?q=5JQH%2BVPM%20Cibogo%20Lembang"
+              target="_blank"
+              aria-label="Lokasi"
+              class="tooltip-container"
+              data-tooltip="Lokasi"
+            >
               <i class="fa-solid fa-location-dot"></i>
-          </a>
-      </div> 
-      </div>
-     <!-- <div>
+            </a>
+          </div>
+        </div>
+        <!-- <div>
         <h4>Kontak</h4>
         <ul class="footer-list" role="list">
           <li>Email: info@amtclembang.co.id</li>
@@ -229,50 +333,53 @@
           <li>Lembang, Jawa Barat</li>
         </ul>
       </div> -->
-      <div>
-        <h4>Navigasi</h4>
-        <ul class="footer-links" role="list">
-          <li><a href="#tentang">Tentang</a></li>
-          <li><a href="#paket">Paket</a></li>
-          <li><a href="#fasilitas">Fasilitas</a></li>
-          <li><a href="#harga">Harga & Booking</a></li>
-        </ul>
+        <div>
+          <h4>Navigasi</h4>
+          <ul class="footer-links" role="list">
+            <li><a href="#tentang">Tentang</a></li>
+            <li><a href="#paket">Paket</a></li>
+            <li><a href="#fasilitas">Fasilitas</a></li>
+            <li><a href="#harga">Harga & Booking</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Fasilitas</h4>
+          <ul class="footer-fasilitas">
+            <li><a href="fasilitas.html">Hall</a></li>
+            <li><a href="fasilitas.html">Food Hall</a></li>
+            <li><a href="fasilitas.html">The Caliph Immersive Space</a></li>
+            <li><a href="fasilitas.html">Souvenir Shop</a></li>
+            <li><a href="fasilitas.html">Training Room</a></li>
+            <li><a href="fasilitas.html">Area Parkir</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Wahana</h4>
+          <ul class="footer-wahana">
+            <li><a href="fasilitas.html">Replika Ka’bah & area Tawaf</a></li>
+            <li><a href="fasilitas.html">Replika Sa’i</a></li>
+            <li><a href="fasilitas.html">Replika Jamarat</a></li>
+            <li><a href="fasilitas.html">Replika Arafah</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Paket</h4>
+          <ul class="footer-paket">
+            <li><a>Paket Sekolah</a></li>
+            <li><a>Paket Keluarga</a></li>
+            <li><a>Paket Travel & KBIHU</a></li>
+            <li><a>Paket Mandiri</a></li>
+          </ul>
+        </div>
       </div>
-     <div>
-        <h4>Fasilitas</h4>
-        <ul class="footer-fasilitas">
-          <li><a href="fasilitas.html">Hall</a></li>
-          <li><a href="fasilitas.html">Food Hall</a></li>
-          <li><a href="fasilitas.html">The Caliph Immersive Space</a></li>
-          <li><a href="fasilitas.html">Souvenir Shop</a></li>
-          <li><a href="fasilitas.html">Training Room</a></li>
-          <li><a href="fasilitas.html">Area Parkir</a></li>
-        </ul>
+      <div class="container footer-copyright">
+        <span>© <span id="year"></span> AMTC. All rights reserved.</span>
       </div>
-      <div>
-        <h4>Wahana</h4>
-        <ul class="footer-wahana">
-          <li><a href="fasilitas.html">Replika Ka’bah & area Tawaf</a></li>
-          <li><a href="fasilitas.html">Replika Sa’i</a></li>
-          <li><a href="fasilitas.html">Replika Jamarat</a></li>
-          <li><a href="fasilitas.html">Replika Arafah</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Paket</h4>
-        <ul class="footer-paket">
-          <li><a>Paket Sekolah</a></li>
-          <li><a>Paket Keluarga</a></li>
-          <li><a>Paket Travel & KBIHU</a></li>  
-          <li><a>Paket Mandiri</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="container footer-copyright">
-      <span>© <span id="year"></span> AMTC. All rights reserved.</span>
-    </div>
-  </footer>
-
-<script src="./script.js"></script>
-</body>
+    </footer>
+    <script src="./script.js"></script>
+      <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+  </body>
 </html>

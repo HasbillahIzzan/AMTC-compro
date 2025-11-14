@@ -1,3 +1,28 @@
+const preloader = document.getElementById("preloader-wrapper");
+
+// 2. Buat promise untuk window load (menunggu semua konten)
+const loadPromise = new Promise((resolve) => {
+  window.addEventListener("load", () => {
+    resolve("load");
+  });
+});
+
+// 3. Buat promise untuk timer 1,2 detik (1200ms)
+const timerPromise = new Promise((resolve) => {
+  setTimeout(() => {
+    resolve("timer");
+  }, 1200); // <-- Diubah ke 1200 milidetik = 1,2 detik
+});
+
+// 4. Jalankan Promise.all
+// Ini akan menunggu KEDUA promise selesai
+Promise.all([loadPromise, timerPromise]).then((values) => {
+  // Setelah 1,2 detik berlalu DAN halaman selesai load
+  if (preloader) {
+    preloader.classList.add("hidden");
+  }
+});
+
 document.addEventListener("DOMContentLoaded", () => {
   // ===================================
   // 1. Mobile Nav Toggle
@@ -190,29 +215,67 @@ document.addEventListener("DOMContentLoaded", () => {
   // ===================================
   // 7. Tombol "Lihat Selengkapnya" (Page Fasilitas)
   // ===================================
-  const showMoreBtn = document.getElementById("show-more-btn");
-  const hiddenItems = document.querySelectorAll(".wahana-card.hidden-item");
+const showMoreBtn = document.getElementById("show-more-btn");
+const hiddenItems = document.querySelectorAll(".wahana-card.hidden-item");
 
-  if (showMoreBtn) {
+if (showMoreBtn) {
     showMoreBtn.addEventListener("click", function () {
-      const isVisible = this.getAttribute("data-visible") === "true";
+        const isVisible = this.getAttribute("data-visible") === "true";
+        const self = this;
 
-      if (!isVisible) {
-        hiddenItems.forEach((item) => {
-          item.style.display = "flex"; // atau 'grid' sesuai layout kamu
-        });
-        this.innerHTML = 'Tutup <i class="fa-solid fa-arrow-up-long"></i>';
-        this.setAttribute("data-visible", "true");
-      } else {
-        hiddenItems.forEach((item) => {
-          item.style.display = "none";
-        });
-        this.innerHTML =
-          'Lihat Selengkapnya <i class="fa-solid fa-arrow-down-long"></i>';
-        this.setAttribute("data-visible", "false");
-      }
+        if (!isVisible) {
+            
+            self.innerHTML = 'Tutup <i class="fa-solid fa-arrow-up-long"></i>';
+            self.setAttribute("data-visible", "true");
+
+            hiddenItems.forEach((item, index) => {
+                // 1. Ambil duration dari atribut data-aos-duration (default 1000ms)
+                const duration = parseInt(item.getAttribute('data-aos-duration')) || 1000;
+                
+                // 2. Tentukan delay manual untuk efek berurutan
+                const delay = index * 100; // Jeda 100ms antar kartu
+                
+                // 3. Atur display ke 'flex' dan initial state (opacity: 0, translateY: 20px)
+                item.style.display = "flex"; 
+                item.style.opacity = '0';
+                item.style.transform = 'translateY(20px)';
+                
+                // 4. Setelah jeda sangat kecil, picu transisi
+                setTimeout(() => {
+                    // Terapkan transisi dengan duration dan delay yang sudah dihitung
+                    item.style.transition = `opacity ${duration}ms ease-out ${delay}ms, transform ${duration}ms ease-out ${delay}ms`;
+                    
+                    // Pindah ke final state (animasi fade-up)
+                    item.style.opacity = '1';
+                    item.style.transform = 'translateY(0)';
+                    
+                    // 5. Setelah animasi selesai, hapus transisi inline agar tidak mengganggu hover
+                    setTimeout(() => {
+                        item.style.transition = ''; 
+                    }, duration + delay + 50); // Tambah 50ms untuk margin
+                }, 10); // Jeda minimal 10ms
+            });
+            
+            // 6. Scroll ke elemen pertama yang baru muncul
+            const firstNewItem = hiddenItems[0];
+            if (firstNewItem) {
+                firstNewItem.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+
+        } else {
+            // Logika untuk menyembunyikan
+            hiddenItems.forEach((item) => {
+                item.style.transition = '';
+                item.style.opacity = '';
+                item.style.transform = '';
+                item.style.display = "none";
+            });
+            self.innerHTML =
+                'Lihat Selengkapnya <i class="fa-solid fa-arrow-down-long"></i>';
+            self.setAttribute("data-visible", "false");
+        }
     });
-  }
+}
 
   // ===================================
   // 8. Hero Slider Initialization
@@ -262,71 +325,72 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 // =====================================================
-// 10. Testimonial Slider (auto infinite tanpa flash)  // masih error
+// 10. Testimonial Slider (auto infinite tanpa flash)  
 // =====================================================
 // Testimonial Slider Responsive
-const testimonialTrack = document.querySelector(".testimonial-track");
-const testimonialContainer = document.querySelector(".testimonial-slider");
-const testimonialGap = 16;
-let testimonialCurrentIndex = 0;
-let testimonialSlidesPerView = 3;
+const testiTrack = document.querySelector(".testimonial-track");
+const testiCards = Array.from(testiTrack.children);
+const testiCount = testiCards.length;
 
-// Ambil semua slide asli
-let testimonialSlides = Array.from(testimonialTrack.children);
-
-// Duplicate untuk infinite loop
-testimonialSlides.forEach(slide => {
-  const clone = slide.cloneNode(true);
-  testimonialTrack.appendChild(clone);
+// Gandakan semua card untuk loop halus
+// *** Penting: Lakukan kloning SEBELUM menghitung lebar ***
+testiCards.forEach(card => {
+    const clone = card.cloneNode(true);
+    testiTrack.appendChild(clone);
 });
 
-testimonialSlides = Array.from(testimonialTrack.children); // update array
+let testiIndex = 0;
+const gap = 20; // sama dengan CSS
 
-// Update slidesPerView sesuai layar
-function updateSlidesPerView() {
-  const width = window.innerWidth;
-  if (width <= 768) testimonialSlidesPerView = 1;
-  else if (width <= 1024) testimonialSlidesPerView = 2;
-  else testimonialSlidesPerView = 3;
+// --- MODIFIKASI: Hitung lebar kartu setelah DOM dimuat dan kloning selesai ---
+// Ambil lebar *actual* dari elemen pertama (termasuk kloning)
+let testiCardWidth = testiTrack.children[0].getBoundingClientRect().width + gap; 
 
-  // Reset posisi slider saat resize
-  testimonialCurrentIndex = 0;
-  testimonialTrack.style.transition = "none";
-  testimonialTrack.style.transform = "translateX(0)";
+// Tambahkan event listener untuk menghitung ulang saat ukuran layar berubah
+function updateCardWidth() {
+    // Memastikan lebar dihitung ulang jika terjadi perubahan ukuran layar (misalnya pada media query)
+    const firstCard = testiTrack.children[0];
+    if (firstCard) {
+        testiCardWidth = firstCard.getBoundingClientRect().width + gap;
+        // Opsional: Atur ulang posisi track ke 0 saat resize untuk menghindari posisi aneh
+        // testiTrack.style.transition = "none";
+        // testiTrack.style.transform = "translateX(0)";
+        // testiIndex = 0;
+    }
 }
 
-updateSlidesPerView();
-window.addEventListener("resize", updateSlidesPerView);
+// Jalankan saat load dan resize
+window.addEventListener('resize', updateCardWidth);
+window.addEventListener('load', updateCardWidth); 
 
-// Hitung lebar per card
-function getCardWidth() {
-  return testimonialContainer.clientWidth / testimonialSlidesPerView - ((testimonialGap * (testimonialSlidesPerView - 1)) / testimonialSlidesPerView);
+// --- Jaga fungsi autoSlideTesti tetap sama ---
+function autoSlideTesti() {
+    // Memastikan lebar sudah dihitung
+    if (testiCardWidth === gap) {
+        updateCardWidth(); // Hitung ulang jika lebar kartu belum terdeteksi (misalnya jika image belum load)
+    }
+
+    testiIndex++;
+    testiTrack.style.transition = "transform 0.7s ease-in-out";
+    testiTrack.style.transform = `translateX(${-testiCardWidth * testiIndex}px)`;
+
+    // Reset jika sudah mencapai loop clone set
+    if (testiIndex >= testiCount) {
+        setTimeout(() => {
+            testiTrack.style.transition = "none";
+            testiTrack.style.transform = "translateX(0)";
+            testiIndex = 0;
+        }, 750); // Harus lebih besar dari waktu transisi CSS (0.7s)
+    }
 }
 
-// Geser slide
-function moveSlide() {
-  const cardWidth = getCardWidth();
-  testimonialCurrentIndex++;
-  testimonialTrack.style.transition = "transform 0.8s ease-in-out";
-  testimonialTrack.style.transform = `translateX(-${(cardWidth + testimonialGap) * testimonialCurrentIndex}px)`;
+// Jalankan otomatis
+setInterval(autoSlideTesti, 3500);
 
-  if (testimonialCurrentIndex >= testimonialSlides.length / 2) {
-    setTimeout(() => {
-      testimonialTrack.style.transition = "none";
-      testimonialTrack.style.transform = "translateX(0)";
-      testimonialCurrentIndex = 0;
-    }, 900);
-  }
-}
-
-// Auto play
-let sliderInterval = setInterval(moveSlide, 4000);
-
-// Pause saat hover / touch
-testimonialContainer.addEventListener("mouseenter", () => clearInterval(sliderInterval));
-testimonialContainer.addEventListener("mouseleave", () => sliderInterval = setInterval(moveSlide, 4000));
-testimonialContainer.addEventListener("touchstart", () => clearInterval(sliderInterval));
-testimonialContainer.addEventListener("touchend", () => sliderInterval = setInterval(moveSlide, 4000));
+// Kalau window resize → update width
+window.addEventListener("resize", () => {
+    testiCardWidth = testiTrack.children[0].getBoundingClientRect().width + 16;
+});
 
 
   // ===================================
@@ -361,7 +425,6 @@ testimonialContainer.addEventListener("touchend", () => sliderInterval = setInte
     }
   }
 
-  // jalan otomatis tiap 3 detik
   setInterval(moveSlide, 5000);
 });
 

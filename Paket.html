@@ -12,6 +12,8 @@
     <script src="https://kit.fontawesome.com/f5586eae9e.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&family=The+Seasons&display=swap"rel="stylesheet">
     <link rel="stylesheet" href="./style.css" />
+    <!-- AOS -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 </head>
 <body>
     <header class="site-header" aria-label="Navigasi utama">
@@ -59,14 +61,14 @@
 <!-- Paket -->
  <section class="section paket-section">
   <div class="container">
-    <header class="paket-head">
+    <header class="paket-head" data-aos="fade-up" data-aos-duration="1500">
       <img src="AMTC - ASSET BG/Ornamnet 1.png" alt="pattern dekoratif" class="paket-dekorasi">
       <h2 class="paket-title">Paket Pilihan</h2>
       <p class="paket-subtitle">Temukan paket terbaik sesuai kebutuhanmu!</p>
     </header>
 
     <div class="paket-grid">
-      <div class="paket-card">
+      <div class="paket-card" data-aos="fade-right" data-aos-duration="1500">
         <img src="AMTC - ASSETS/Paket1.jpg" alt="Paket 1" class="paket-img">
         <div class="paket-desc">
           <h3>Paket Sekolah</h3>
@@ -74,7 +76,7 @@
         </div>
       </div>
 
-       <div class="paket-card">
+       <div class="paket-card" data-aos="fade-left" data-aos-duration="1500">
         <img src="AMTC - ASSETS/Paket1.jpg" alt="Paket 2" class="paket-img">
         <div class="paket-desc">
           <h3>Paket Keluarga</h3>
@@ -186,6 +188,10 @@
   </footer>
 
   <script src="./script.js"></script>
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
 </body>
 
 </html>

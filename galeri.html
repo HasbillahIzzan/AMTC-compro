@@ -20,6 +20,8 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./style.css" />
+    <!-- AOS -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
   </head>
   <body>
     <header class="site-header" aria-label="Navigasi utama">
@@ -72,12 +74,12 @@
     <!--Gallery Section-->
     <section class="section gallery-section">
       <div class="container">
-        <div class="section-head-galeri">
+        <div class="section-head-galeri" data-aos="fade-up" data-aos-duration="1500">
           <img src="AMTC - ASSET BG/Ornamnet 1.png" alt="pattern dekoratif" class="galeri-dekorasi">
           <h2 class="text-balance-galeri">Galeri Foto</h2>
         </div>
 
-        <div class="gallery-grid-fixed">
+        <div class="gallery-grid-fixed" data-aos="fade-up" data-aos-duration="1500">
           <div class="gallery-item-fixed">
             <img src="AMTC - ASSETS/galeri1.jpeg" alt="galeri1" />
             <div class="zoom-overlay">
@@ -188,7 +190,7 @@
     <!-- Testimoni section --> <!--masih error-->
   <section class="section testimonial-section">
   <div class="container">
-    <header class="section-head-left">
+    <header class="section-head-left" data-aos="fade-up" data-aos-duration="1500">
       <h2 class="testimonial-heading1">Testimoni</h2>
       <h2 class="testimonial-heading2">
         Disukai oleh pelanggan dari berbagai kalangan.
@@ -196,7 +198,7 @@
     </header>
 
     <div class="testimonial-slider">
-      <div class="testimonial-track">
+      <div class="testimonial-track" data-aos="fade-up" data-aos-duration="1500">
         <div class="testimonial-card">
           <img src="AMTC - ASSETS/AMTC - Testimonial 1.png" alt="Testimoni 1" />
         </div>
@@ -214,8 +216,8 @@
 
 
     <!-- gambar slider -->
-    <section class="image-slider-section">
-      <div class="image-slider">
+    <section class="image-slider-section" >
+      <div class="image-slider" >
         <div class="slider-track">
           <img src="AMTC - ASSETS/galeri1.jpeg" alt="galeri1" />
           <img src="AMTC - ASSETS/galeri2.jpeg" alt="galeri2" />
@@ -337,5 +339,9 @@
     </footer>
 
     <script src="./script.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
   </body>
 </html>
