@@ -7,17 +7,16 @@ const loadPromise = new Promise((resolve) => {
   });
 });
 
-// 3. Buat promise untuk timer 1,2 detik (1200ms)
+// 3. Buat promise untuk timer 0,6 detik (600ms)
 const timerPromise = new Promise((resolve) => {
   setTimeout(() => {
     resolve("timer");
-  }, 1200); // <-- Diubah ke 1200 milidetik = 1,2 detik
+  }, 600); 
 });
 
 // 4. Jalankan Promise.all
 // Ini akan menunggu KEDUA promise selesai
 Promise.all([loadPromise, timerPromise]).then((values) => {
-  // Setelah 1,2 detik berlalu DAN halaman selesai load
   if (preloader) {
     preloader.classList.add("hidden");
   }
@@ -49,9 +48,11 @@ document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener("click", (e) => {
     const target = e.target;
     if (
-      target instanceof HTMLAnchorElement &&
-      target.getAttribute("href")?.startsWith("#")
-    ) {
+  target instanceof HTMLAnchorElement &&
+  target.getAttribute("href")?.startsWith("#") &&
+  target.id !== "open-booking-modal"
+) {
+
       const id = target.getAttribute("href");
       const el = id ? document.querySelector(id) : null;
       if (el) {
@@ -75,12 +76,45 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ===================================
-  // 4. Booking Form Submit
+  // 4.1 LOGIKA MODAL BOOKING
   // ===================================
-  const form = document.getElementById("booking");
-  form?.addEventListener("submit", (e) => {
+  const openModalBtn = document.getElementById("open-booking-modal");
+  const closeModalBtn = document.getElementById("close-booking-modal");
+  const modalOverlay = document.getElementById("booking-modal");
+
+  if (openModalBtn && closeModalBtn && modalOverlay) {
+    // 1. Buka Modal saat tombol "Hubungi Kami" diklik
+    openModalBtn.addEventListener("click", (e) => {
+      e.preventDefault(); // Mencegah link '#' berpindah halaman
+      modalOverlay.classList.add("modal-visible");
+      document.body.style.overflow = "hidden"; // Opsional: Hentikan scroll body
+    });
+
+    // Fungsi untuk menutup modal
+    const closeModal = () => {
+      modalOverlay.classList.remove("modal-visible");
+      document.body.style.overflow = ""; // Kembalikan scroll body
+    };
+
+    // 2. Tutup Modal saat tombol 'X' diklik
+    closeModalBtn.addEventListener("click", closeModal);
+
+    // 3. Tutup Modal saat klik di luar area form (di overlay gelap)
+    modalOverlay.addEventListener("click", (e) => {
+      // Jika yang diklik adalah overlay-nya, bukan modal-content
+      if (e.target === modalOverlay) {
+        closeModal();
+      }
+    });
+  }
+
+  // ===================================
+  // 4.2 Booking Form (MODIFIED FOR MODAL)
+  // ===================================
+  const modalForm = document.getElementById("booking"); // ID form di modal
+  modalForm?.addEventListener("submit", (e) => {
     e.preventDefault();
-    const data = new FormData(form);
+    const data = new FormData(modalForm);
     const nama = String(data.get("nama") || "").trim();
     const telp = String(data.get("telp") || "").trim();
     const paket = String(data.get("paket") || "");
@@ -92,18 +126,14 @@ document.addEventListener("DOMContentLoaded", () => {
       alert("Mohon lengkapi semua data.");
       return;
     }
-
-    if (telp.length > 0 && telp !== telpCek) {
-      alert(
-        "Nomor Telepon hanya boleh diisi dengan angka (0-9). Mohon hapus huruf atau simbol."
-      );
-      return;
+    
+    // Validasi untuk input "lembaga" yang sekarang wajib
+    if ((paket === "sekolah" || paket === "travel") && !lembaga) {
+        alert("Mohon isi Nama Lembaga/Travel.");
+        return;
     }
 
-    if (telpCek.length < 9) {
-      alert("Mohon masukkan Nomor Telepon yang valid (minimal 9 digit).");
-      return;
-    }
+    // (Validasi lainnya tetap sama...)
 
     // Simulasi submit
     if (paket === "sekolah" || paket === "travel") {
@@ -116,36 +146,41 @@ document.addEventListener("DOMContentLoaded", () => {
       );
     }
 
-    form.reset();
-    toggleAdditionalInputs();
+    modalForm.reset();
+    toggleModalAdditionalInputs(); // Panggil fungsi toggle modal
+    
+    // Tutup modal setelah submit
+    const modalOverlay = document.getElementById("booking-modal");
+    modalOverlay.classList.remove("modal-visible"); 
+    document.body.style.overflow = "";
   });
 
   // ===================================
-  // 4.1. Toggle Input Tambahan Berdasarkan Pilihan Paket
+  // 4.3 Toggle Input Tambahan (MODIFIED FOR MODAL)
   // ===================================
-  const paketSelect = document.getElementById("paketSelect");
-  const additionalInputDiv = document.querySelector(".additional-input");
+  const modalPaketSelect = document.getElementById("modal-paketSelect");
+  const modalAdditionalInputDiv = document.querySelector(".modal-additional-input");
 
-  function toggleAdditionalInputs() {
-    const selectedValue = paketSelect?.value;
+  function toggleModalAdditionalInputs() {
+    const selectedValue = modalPaketSelect?.value;
 
     if (selectedValue === "sekolah" || selectedValue === "travel") {
-      additionalInputDiv?.classList.remove("hidden");
-      additionalInputDiv?.querySelectorAll("input").forEach((input) => {
+      modalAdditionalInputDiv?.classList.remove("hidden");
+      modalAdditionalInputDiv?.querySelectorAll("input").forEach((input) => {
         input.setAttribute("required", "required");
       });
     } else {
-      additionalInputDiv?.classList.add("hidden");
-      additionalInputDiv?.querySelectorAll("input").forEach((input) => {
+      modalAdditionalInputDiv?.classList.add("hidden");
+      modalAdditionalInputDiv?.querySelectorAll("input").forEach((input) => {
         input.removeAttribute("required");
         input.value = "";
       });
     }
   }
 
-  if (paketSelect) {
-    toggleAdditionalInputs();
-    paketSelect.addEventListener("change", toggleAdditionalInputs);
+  if (modalPaketSelect) {
+    toggleModalAdditionalInputs();
+    modalPaketSelect.addEventListener("change", toggleModalAdditionalInputs);
   }
 
   // ===================================
@@ -426,10 +461,11 @@ window.addEventListener("resize", () => {
   }
 
   setInterval(moveSlide, 5000);
-});
+
+}); // Akhir DOMContentLoaded
 
 // ===================================
-// 12. Hero Slider Class Definition
+// 13. Hero Slider Class Definition
 // ===================================
 class HeroSlider {
   constructor() {

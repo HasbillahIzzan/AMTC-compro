@@ -16,10 +16,12 @@
   <script src="https://kit.fontawesome.com/f5586eae9e.js" crossorigin="anonymous"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&family=The+Seasons&display=swap"rel="stylesheet">
   <link rel="stylesheet" href="./style.css" />
+  <!-- AOS -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css"/>
 </head>
 <body>
   <div id="preloader-wrapper">
-    <div class="loader"></div>
+    <img src="AMTC - ASSETS/AMTC - Relif Icon loader.png" alt="Loading..." class="loader-spinner">
   </div>
      <header class="site-header" aria-label="Navigasi utama">
     <div class="container header-inner">
@@ -63,7 +65,8 @@
 </section>
 <!-- Promo -->
  <section class="section promo-section">
-  <div class="container">
+    <img src="AMTC - ASSET BG/Ornamnet 1.png" alt="pattern dekoratif" class="paket-dekorasi"  data-aos="fade-up" data-aos-duration="1500">
+  <div class="container"  data-aos="fade-up" data-aos-duration="1500">
     <header class="promo-head">
       <h2 class="promo-title">Promo</h2>
       <p class="promo-description">Belum ada promo yang tersedia saat ini.</p>
@@ -155,5 +158,9 @@
   </footer>
 
   <script src="./script.js"></script>
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
 </body>
 </html>
