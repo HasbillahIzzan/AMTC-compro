@@ -78,17 +78,23 @@ document.addEventListener("DOMContentLoaded", () => {
   // ===================================
   // 4.1 LOGIKA MODAL BOOKING
   // ===================================
-  const openModalBtn = document.getElementById("open-booking-modal");
-  const closeModalBtn = document.getElementById("close-booking-modal");
-  const modalOverlay = document.getElementById("booking-modal");
+  const openModalBtns = document.querySelectorAll(".open-booking-trigger"); // <- Perubahan 1: 'Btns' (plural) dan pakai querySelectorAll
+const closeModalBtn = document.getElementById("close-booking-modal");
+const modalOverlay = document.getElementById("booking-modal");
 
-  if (openModalBtn && closeModalBtn && modalOverlay) {
-    // 1. Buka Modal saat tombol "Hubungi Kami" diklik
-    openModalBtn.addEventListener("click", (e) => {
+// 2. UBAH KONDISI 'IF'
+// Cek jika jumlah tombol yang ditemukan lebih dari 0
+if (openModalBtns.length > 0 && closeModalBtn && modalOverlay) { // <- Perubahan 2: Cek .length
+
+  // 3. GUNAKAN LOOP (forEach)
+  // Pasang event listener ke SETIAP tombol yang ditemukan
+  openModalBtns.forEach(btn => { // <- Perubahan 3: Tambahkan loop
+    btn.addEventListener("click", (e) => {
       e.preventDefault(); // Mencegah link '#' berpindah halaman
       modalOverlay.classList.add("modal-visible");
       document.body.style.overflow = "hidden"; // Opsional: Hentikan scroll body
     });
+  });
 
     // Fungsi untuk menutup modal
     const closeModal = () => {
@@ -109,51 +115,73 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ===================================
-  // 4.2 Booking Form (MODIFIED FOR MODAL)
-  // ===================================
-  const modalForm = document.getElementById("booking"); // ID form di modal
-  modalForm?.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const data = new FormData(modalForm);
-    const nama = String(data.get("nama") || "").trim();
-    const telp = String(data.get("telp") || "").trim();
-    const paket = String(data.get("paket") || "");
-    const lembaga = String(data.get("lembaga") || "").trim();
-    const tanggal = String(data.get("tanggal") || "");
+// 4.2 Booking Form (MODIFIED FOR MODAL)
+// ===================================
+const modalForm = document.getElementById("booking"); // ID form di modal
+modalForm?.addEventListener("submit", (e) => {
+  e.preventDefault(); // Mencegah form submit default
 
-    const telpCek = telp.replace(/\D/g, "");
-    if (!nama || !telp || !paket || !tanggal) {
-      alert("Mohon lengkapi semua data.");
+  // 1. Ambil data dari form
+  const data = new FormData(modalForm);
+  const nama = String(data.get("nama") || "").trim();
+  const telp = String(data.get("telp") || "").trim();
+  const paket = String(data.get("paket") || "");
+  const lembaga = String(data.get("lembaga") || "").trim();
+  const tanggal = String(data.get("tanggal") || "");
+
+  // 2. Validasi (Sama seperti sebelumnya)
+  const telpCek = telp.replace(/\D/g, "");
+  if (!nama || !telp || !paket || !tanggal) {
+    alert("Mohon lengkapi semua data.");
+    return;
+  }
+  
+  if ((paket === "sekolah" || paket === "travel") && !lembaga) {
+      alert("Mohon isi Nama Lembaga/Travel.");
       return;
-    }
-    
-    // Validasi untuk input "lembaga" yang sekarang wajib
-    if ((paket === "sekolah" || paket === "travel") && !lembaga) {
-        alert("Mohon isi Nama Lembaga/Travel.");
-        return;
-    }
+  }
 
-    // (Validasi lainnya tetap sama...)
+  // 3. Tentukan Nomor WhatsApp Tujuan
+  // PENTING: Ganti dengan nomor WA Anda. Awali dengan 62 (bukan 0).
+  const nomorTujuan = "6287822037779"; 
 
-    // Simulasi submit
-    if (paket === "sekolah" || paket === "travel") {
-      alert(
-        `Terima kasih, ${nama}!\nPesanan Anda untuk paket "${paket.toUpperCase()}" dengan lembaga/travel "${lembaga}" pada ${tanggal} telah kami terima.\nKami akan menghubungi Anda di Whatsapp.`
-      );
-    } else {
-      alert(
-        `Terima kasih, ${nama}!\nPesanan Anda untuk paket "${paket.toUpperCase()}" pada ${tanggal} telah kami terima.\nKami akan menghubungi Anda di Whatsapp.`
-      );
-    }
+  // 4. Susun Pesan WhatsApp
+  let pesan = `Halo AMTC, saya ingin booking jadwal manasik.\n\n`;
+  pesan += `*Nama Pemesan:* ${nama}\n`;
+  pesan += `*No. Telepon/WA (aktif):* ${telp}\n`;
+  pesan += `*Paket Dipilih:* ${paket}\n`;
+  
+  // Tambahkan baris Lembaga HANYA jika paketnya sekolah/travel
+  if ((paket === "sekolah" || paket === "travel") && lembaga) {
+    pesan += `*Nama Lembaga/Travel:* ${lembaga}\n`;
+  }
+  
+  pesan += `*Tanggal Kunjungan:* ${tanggal}\n\n`;
+  pesan += `Mohon konfirmasi ketersediaan jadwal. Terima kasih.`;
 
-    modalForm.reset();
-    toggleModalAdditionalInputs(); // Panggil fungsi toggle modal
-    
-    // Tutup modal setelah submit
-    const modalOverlay = document.getElementById("booking-modal");
-    modalOverlay.classList.remove("modal-visible"); 
-    document.body.style.overflow = "";
-  });
+  // 5. Encode pesan untuk URL dan buat link WA
+  const pesanTerenkode = encodeURIComponent(pesan);
+  const urlWA = `https://wa.me/${nomorTujuan}?text=${pesanTerenkode}`;
+
+  // 6. Buka WhatsApp di tab baru
+  window.open(urlWA, '_blank');
+
+  // 7. Reset form dan tutup modal (Sama seperti sebelumnya)
+  modalForm.reset();
+  
+  // Kita panggil fungsi toggleModalAdditionalInputs dari script Anda
+  // (Pastikan fungsi ini ada di scope global atau didefinisikan sebelum dipanggil)
+  if (typeof toggleModalAdditionalInputs === 'function') {
+      toggleModalAdditionalInputs();
+  } else {
+      // Fallback jika fungsi tidak ditemukan (meskipun di script Anda ada)
+      document.querySelector(".modal-additional-input")?.classList.add("hidden");
+  }
+  
+  const modalOverlay = document.getElementById("booking-modal");
+  modalOverlay.classList.remove("modal-visible"); 
+  document.body.style.overflow = "";
+});
 
   // ===================================
   // 4.3 Toggle Input Tambahan (MODIFIED FOR MODAL)

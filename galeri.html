@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="AMTC - ASSETS/Logo 4.png" type="image/png">
     <title>Galeri</title>
     <meta
       name="description"
@@ -59,7 +60,7 @@
             <li><a href="Paket.html">Paket</a></li>
             <li><a href="Promo.html">Promo</a></li>
           </ul>
-          <a class="btn btn-kontak" href="#kontak">kontak</a>
+          <a class="btn btn-kontak open-booking-trigger" href="#">Hubungi Kami</a>
         </nav>
       </div>
     </header>
@@ -231,6 +232,13 @@
         </div>
       </div>
     </section>
+
+     <!---WhatsApp Floating Button--->
+    <a href="https://wa.me/6287822037779" class="whatsapp-float" target="_blank" rel="noopener"
+      aria-label="Chat via WhatsApp">
+      <img src="AMTC - ASSETS\whatsapp copy.png" alt="Ikon WhatsApp untuk Chat" />
+      </a>
+    </a>
     <!-- ============================
                 FOOTER SECTION 
             ============================= -->
@@ -303,26 +311,27 @@
             <li><a href="#harga">Harga & Booking</a></li>
           </ul>
         </div>
-        <div>
-          <h4>Fasilitas</h4>
-          <ul class="footer-fasilitas">
-            <li><a href="fasilitas.html">Hall</a></li>
-            <li><a href="fasilitas.html">Food Hall</a></li>
-            <li><a href="fasilitas.html">The Caliph Immersive Space</a></li>
-            <li><a href="fasilitas.html">Souvenir Shop</a></li>
-            <li><a href="fasilitas.html">Training Room</a></li>
-            <li><a href="fasilitas.html">Area Parkir</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4>Wahana</h4>
-          <ul class="footer-wahana">
-            <li><a href="fasilitas.html">Replika Ka’bah & area Tawaf</a></li>
-            <li><a href="fasilitas.html">Replika Sa’i</a></li>
-            <li><a href="fasilitas.html">Replika Jamarat</a></li>
-            <li><a href="fasilitas.html">Replika Arafah</a></li>
-          </ul>
-        </div>
+       <div>
+        <h4>Fasilitas</h4>
+        <ul class="footer-fasilitas">
+          <li><a href="fasilitas.html">Hall</a></li>
+          <li><a href="fasilitas.html">Food Hall</a></li>
+          <li><a href="fasilitas.html">The Caliph Immersive Space</a></li>
+          <li><a href="fasilitas.html">Souvenir Shop</a></li>
+          <li><a href="fasilitas.html">Ruang Pelatihan</a></li>
+          <li><a href="fasilitas.html">Masjid Darul Aulia</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Wahana</h4>
+        <ul class="footer-wahana">
+          <li><a href="fasilitas.html">Replika Ka'abah</a></li>
+          <li><a href="fasilitas.html">Replika Sa’i</a></li>
+          <li><a href="fasilitas.html">Replika Jamarat</a></li>
+          <li><a href="fasilitas.html">Replika Tenda Mina & Arafah</a></li>
+          <li><a href="fasilitas.html">Al Cinema Theatre</a></li>
+        </ul>
+      </div>
         <div>
           <h4>Paket</h4>
           <ul class="footer-paket">
@@ -337,6 +346,71 @@
         <span>© <span id="year"></span> AMTC. All rights reserved.</span>
       </div>
     </footer>
+
+      <!-- PRICING (button Hubungi Kami) -->
+<div id="booking-modal" class="modal-overlay">
+  <div class="modal-content">
+    <div class="modal-grid">
+      <div class="modal-image">
+        <img src="Fasilitas/Replika Kaaba.png" alt="Suasana AMTC" />
+      </div>
+
+      <div class="modal-form-area">
+        <button id="close-booking-modal" class="modal-close" aria-label="Tutup modal">
+          <i class="fa-solid fa-times"></i>
+        </button>
+
+        <div class="modal-info">
+           <img src="AMTC - ASSET BG/Ornamnet 1.png" alt="pattern dekoratif" class="hubungi-dekorasi">
+          <h2>Pricing and Booking</h2>
+          <ul class="price-list" role="list">
+            <li><strong>Harga:</strong> Mulai dari Rp60.000/orang</li>
+            <li><strong>Jam Operasional:</strong> 07:00 - 18:00</li>
+            <li>
+              <strong>Lokasi:</strong> Jl. Raya Tangkuban Parahu, Cibogo, Kec. Lembang, Kabupaten Bandung Barat, Jawa Barat 403911
+            </li>
+          </ul>
+          <a href="https://maps.google.com/?q=5JQH%2BVPM%20Cibogo%20Lembang" target="_blank" rel="noopener">
+          <i class="fa-solid fa-map-location-dot"></i>
+          </a>
+        </div>
+
+        <form id="booking" class="booking-form" aria-label="Form Booking Manasik">
+          <h3>Pesan Sekarang</h3>
+          <div class="form-row">
+            <label for="modal-nama">Nama Lengkap</label>
+            <input id="modal-nama" name="nama" type="text" placeholder="Nama Anda" required />
+          </div>
+          <div class="form-row">
+            <label for="modal-telp">No. Telepon/WA (Aktif)</label>
+            <input id="modal-telp" name="telp" type="tel" inputmode="tel" placeholder="08xxxxxxxxxx" required />
+          </div>
+          <div class="form-row">
+            <label for="modal-paketSelect">Pilih Paket</label>
+            <select id="modal-paketSelect" name="paket" required>
+              <option value="">-- Pilih Paket --</option>
+              <option value="sekolah">Paket Sekolah</option>
+              <option value="keluarga">Paket Keluarga</option>
+              <option value="travel">Paket Travel & KBIHU</option>
+              <option value="mandiri">Paket Mandiri</option>
+            </select>
+          </div>
+          <div class="modal-additional-input hidden">
+            <div class="form-row">
+              <label for="modal-lembaga">Nama Lembaga/Travel</label>
+              <input id="modal-lembaga" name="lembaga" type="text" placeholder="Nama Lembaga/Travel" />
+            </div>
+          </div>
+          <div class="form-row">
+            <label for="modal-tanggal">Tanggal Kunjungan</label>
+            <input id="modal-tanggal" name="tanggal" type="date" required />
+          </div>
+          <button type="submit" class="btn btn-pemesanan">Kirim Pemesanan</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
     <script src="./script.js"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
