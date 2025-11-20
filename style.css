@@ -913,7 +913,7 @@ a {
   color: #2b2b2b;
   display: inline-block;
   padding: 8px 16px;
-  background-color: var(--accent2);
+  background-color: var(--bg);
   border-radius: 6px;
   margin-bottom: 0.5rem;
 }
@@ -1457,8 +1457,12 @@ a {
 
 /* Footer */
 .site-footer {
-  background: url("AMTC - ASSET BG/AMTC - Background Hijau.png");
+  background-image: url("AMTC - ASSET BG/AMTC - Background Hijau.png");
+  background-size: cover; 
+  background-repeat: no-repeat;
+  background-position: center;
   border-top: 1px solid #e9eded;
+  width: 100%; 
 }
 
 .brand-footer {
@@ -1476,7 +1480,7 @@ a {
   width: 85px;
   height: 85px;
   border-radius: 50%;
-  background-color: #b18b4f;
+  background-color: var(--bg);
   overflow: hidden;
   padding: 8px;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.25);

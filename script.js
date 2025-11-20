@@ -128,11 +128,12 @@ modalForm?.addEventListener("submit", (e) => {
   const paket = String(data.get("paket") || "");
   const lembaga = String(data.get("lembaga") || "").trim();
   const tanggal = String(data.get("tanggal") || "");
+  const kota = String(data.get("Kota") || "").trim(); 
+  const keperluan = String(data.get("keperluan") || "").trim();
 
-  // 2. Validasi (Sama seperti sebelumnya)
-  const telpCek = telp.replace(/\D/g, "");
-  if (!nama || !telp || !paket || !tanggal) {
-    alert("Mohon lengkapi semua data.");
+  // 2. Validasi
+  if (!nama || !telp || !paket || !tanggal || !kota || !keperluan) {
+    alert("Mohon lengkapi semua data wajib.");
     return;
   }
   
@@ -142,13 +143,13 @@ modalForm?.addEventListener("submit", (e) => {
   }
 
   // 3. Tentukan Nomor WhatsApp Tujuan
-  // PENTING: Ganti dengan nomor WA Anda. Awali dengan 62 (bukan 0).
-  const nomorTujuan = "6287822037779"; 
+  const nomorTujuan = "6283829278435"; 
 
-  // 4. Susun Pesan WhatsApp
-  let pesan = `Halo AMTC, saya ingin booking jadwal manasik.\n\n`;
+  // 4. Susun Pesan WhatsApp (UPDATE DI SINI)
+  let pesan = `Halo AMTC Teras Lembang, saya ingin booking jadwal manasik.\n\n`;
   pesan += `*Nama Pemesan:* ${nama}\n`;
-  pesan += `*No. Telepon/WA (aktif):* ${telp}\n`;
+  pesan += `*No. Telepon/WA:* ${telp}\n`;
+  pesan += `*Asal (Kecamatan - Kota):* ${kota}\n`; // Menambahkan Kota
   pesan += `*Paket Dipilih:* ${paket}\n`;
   
   // Tambahkan baris Lembaga HANYA jika paketnya sekolah/travel
@@ -156,6 +157,7 @@ modalForm?.addEventListener("submit", (e) => {
     pesan += `*Nama Lembaga/Travel:* ${lembaga}\n`;
   }
   
+  pesan += `*Keperluan yaang ingin disampaikan:* ${keperluan}\n`; // Menambahkan Keperluan
   pesan += `*Tanggal Kunjungan:* ${tanggal}\n\n`;
   pesan += `Mohon konfirmasi ketersediaan jadwal. Terima kasih.`;
 
@@ -166,15 +168,12 @@ modalForm?.addEventListener("submit", (e) => {
   // 6. Buka WhatsApp di tab baru
   window.open(urlWA, '_blank');
 
-  // 7. Reset form dan tutup modal (Sama seperti sebelumnya)
+  // 7. Reset form dan tutup modal
   modalForm.reset();
   
-  // Kita panggil fungsi toggleModalAdditionalInputs dari script Anda
-  // (Pastikan fungsi ini ada di scope global atau didefinisikan sebelum dipanggil)
   if (typeof toggleModalAdditionalInputs === 'function') {
       toggleModalAdditionalInputs();
   } else {
-      // Fallback jika fungsi tidak ditemukan (meskipun di script Anda ada)
       document.querySelector(".modal-additional-input")?.classList.add("hidden");
   }
   
