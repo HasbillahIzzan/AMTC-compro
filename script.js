@@ -143,7 +143,7 @@ modalForm?.addEventListener("submit", (e) => {
   }
 
   // 3. Tentukan Nomor WhatsApp Tujuan
-  const nomorTujuan = "6283829278435"; 
+  const nomorTujuan = "6287822037779"; 
 
   // 4. Susun Pesan WhatsApp (UPDATE DI SINI)
   let pesan = `Halo AMTC Teras Lembang, saya ingin booking jadwal manasik.\n\n`;
