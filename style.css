@@ -2123,6 +2123,7 @@ a {
 .section-head-left {
   margin-bottom: 2rem;
   text-align: left;
+  margin-left: 80px;
 }
 
 .testimonial-heading1 {
@@ -2132,7 +2133,7 @@ a {
   padding: 8px 20px;
   font-family: "Poppins", sans-serif;
   font-weight: 700;
-  font-size: 1.1rem;
+  font-size: 1.8rem;
   color: var(--brand);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
   text-transform: capitalize;
@@ -2142,7 +2143,7 @@ a {
 .testimonial-heading2 {
   font-family: "Poppins", sans-serif;
   font-weight: 700;
-  font-size: clamp(1.8rem, 2vw + 1rem, 2.5rem);
+  font-size: 2.5rem;  
   color: var(--brand);
   margin: 0;
   max-width: 600px;
