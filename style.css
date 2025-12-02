@@ -1009,11 +1009,11 @@ a {
   justify-content: space-between;
 }
 
-/*.paket-icon {
+.paket-icon {
   width: 30px;
   height: 30px;
   object-fit: contain;
-}*/
+}
 
 @media (min-width: 700px) {
   .cards-4 {
@@ -1549,6 +1549,7 @@ a {
 .footer-links a:hover,
 .footer-fasilitas a:hover,
 .footer-wahana a:hover,
+.footer-paket a:hover,
 .footer-links a:focus-visible {
   text-decoration: underline;
 }
