@@ -23,6 +23,7 @@ AMTC (Al Mahmudah Manasik Training Centre) adalah destinasi wisata religi dan pu
 - **Google Fonts**: Menggunakan font The Seasons, Montserrat, dan Poppins.
 
 ## Project Structure
+```
 amtc_website/
 ├── AMTC - ASSETS/             # Aset ikon, logo, dan font
 ├── AMTC - ASSET BG/           # Aset background dan ornamen
@@ -36,6 +37,7 @@ amtc_website/
 ├── style.css                  # Stylesheet utama (Variables, Layout, Responsive)
 ├── script.js                  # Logika JavaScript (DOM, Slider, Modal, WA Link)
 └── README.md                  # Dokumentasi Proyek
+```
 
 ## Sections
 1. **Hero Section**: Slider banner utama dengan Value Proposition dan CTA (Call to Action).
