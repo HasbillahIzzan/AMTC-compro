@@ -17,6 +17,7 @@
   <script src="https://kit.fontawesome.com/f5586eae9e.js" crossorigin="anonymous"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&family=The+Seasons&display=swap"rel="stylesheet">
   <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 </head>
     <!-- ============================
                     BODY SECTION 
@@ -114,7 +115,7 @@
     <!---Tentang kami--->
     <section id="tentang" class="section about">
       <div class="container about-grid">
-        <div class="about-copy slide-from-left">
+        <div class="about-copy" data-aos="fade-right" data-aos-duration="1500">
          <div class="container-about-head"> 
           <div class="t1-wrapper">
             <h2 class="about-copy-t1">Tentang Kami</h2>
@@ -129,7 +130,7 @@
             berlatih dengan penuh kesiapan.
           </p>
         </div>  
-        <figure class="about-media slide-from-right">
+        <figure class="about-media" data-aos="fade-left" data-aos-duration="1500">
           <img src="AMTC - ASSET BG/BG 7.png" alt="Suasana pelatihan manasik dengan fasilitas lengkap"
             loading="lazy"/>
         </figure>
@@ -144,7 +145,7 @@
         </header>
 
         <div class="vp-grid">
-          <article class="card">
+          <article class="card" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="0">
             <div class="icon" aria-hidden="true">
               <img src="AMTC - ASSETS\Kaabah.png" alt="Icon Real Experience" />
             </div>
@@ -155,7 +156,7 @@
             </p>
           </article>
 
-          <article class="card">
+          <article class="card" data-aos="fade-left" data-aos-duration="1200" data-aos-delay="0">
             <div class="icon" aria-hidden="true">
               <img src="AMTC - ASSETS/Topi.png" alt="Icon Bimbingan Ahli" />
             </div>
@@ -166,7 +167,7 @@
             </p>
           </article>
 
-          <article class="card">
+          <article class="card" data-aos="fade-left" data-aos-duration="1400" data-aos-delay="0">
             <div class="icon" aria-hidden="true">
               <img src="AMTC - ASSETS/Orang.png" alt="Icon Semua Usia" />
             </div>
@@ -177,7 +178,7 @@
             </p>
           </article>
 
-          <article class="card">
+          <article class="card" data-aos="fade-left" data-aos-duration="1600" data-aos-delay="0">
             <div class="icon" aria-hidden="true">
               <img src="AMTC - ASSETS/Fasilitas.png" alt="Icon Fasilitas" />
             </div>
@@ -188,7 +189,7 @@
             </p>
           </article>
 
-          <article class="card">
+          <article class="card" data-aos="fade-left" data-aos-duration="1800" data-aos-delay="0">
             <div class="icon" aria-hidden="true">
               <img src="AMTC - ASSETS/Perisai.png" alt="Icon kesiapan" />
             </div>
@@ -521,6 +522,12 @@
 </div>
 
   <script src="./script.js"></script>
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init({
+    once: true
+  });
+  </script>
 </body>
 
 </html>

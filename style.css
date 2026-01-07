@@ -135,25 +135,25 @@ a {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #ffffff; 
+  background-color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 99999; 
+  z-index: 99999;
   opacity: 1;
   visibility: visible;
-  transition: opacity 1.0s ease-out, visibility 1.0s ease-out; 
+  transition: opacity 1s ease-out, visibility 1s ease-out;
 }
 
 #preloader-wrapper.hidden {
   opacity: 0;
   visibility: hidden;
-  pointer-events: none; 
+  pointer-events: none;
 }
 
 .loader-spinner {
-  width: 80px;  
-  height: 80px; 
+  width: 80px;
+  height: 80px;
   animation: spin 1.5s linear infinite;
 }
 
@@ -253,39 +253,39 @@ a {
 }
 
 .btn-explore {
-    display: inline-flex;     
-    align-items: center;        
-    gap: 0.8rem;                
-    background-color: var(--brand);  
-    color: white;               
-    transition: background-color 0.3s ease; 
-    border-radius: 999px;       
-    padding: 2px 3px 3px 40px;  
-    text-decoration: none;      
-    margin: 0px 0px 13px;
-    font-size: 1.1rem;
-    font-family: 'Prompt', sans-serif;
-    font-size: 16px;   
-    font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  background-color: var(--brand);
+  color: white;
+  transition: background-color 0.3s ease;
+  border-radius: 999px;
+  padding: 2px 3px 3px 40px;
+  text-decoration: none;
+  margin: 0px 0px 13px;
+  font-size: 1.1rem;
+  font-family: "Prompt", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
 }
 
 .btn-explore:hover {
-    background-color: var(--accent);  
+  background-color: var(--accent);
 }
 
 .icon-wrapper {
-    background-color: white;
-    border-radius: 50%;
-    width: 42px;
-    height: 42px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  background-color: white;
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .icon-wrapper i {
-    color: #2c2c2c;
-    font-size: 0.9rem;
+  color: #2c2c2c;
+  font-size: 0.9rem;
 }
 
 /* Header */
@@ -818,14 +818,9 @@ a {
   border-radius: var(--radius);
   padding: 1rem;
   box-shadow: var(--shadow-md);
-  opacity: 0;
-  transform: translateX(100px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-
-.card.is-visible {
   opacity: 1;
-  transform: translateX(0);
+  transform: none;
+  transition: none;
 }
 
 .card .icon {
@@ -938,7 +933,7 @@ a {
   line-height: 1;
 }
 
-.slide-from-left {
+/* .slide-from-left {
   opacity: 0;
   transform: translateX(-100px);
   transition: opacity 0.7s ease-out, transform 0.7s ease-out;
@@ -948,12 +943,12 @@ a {
   opacity: 0;
   transform: translateX(100px);
   transition: opacity 0.7s ease-out, transform 0.7s ease-out;
-}
+} */
 
-.is-visible {
+/* .is-visible {
   opacity: 1;
   transform: translateX(0);
-}
+} */
 
 @media (min-width: 900px) {
   .about-grid {
@@ -1076,91 +1071,91 @@ a {
   }
 }
 
-  /* Pricing & Booking */
-  .pricing {
-    background-image: url("AMTC - ASSET BG/AMTC - BG PATTEN PUTIH 2.png");
-  }
+/* Pricing & Booking */
+.pricing {
+  background-image: url("AMTC - ASSET BG/AMTC - BG PATTEN PUTIH 2.png");
+}
+.pricing-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.2rem;
+  align-items: flex-start;
+}
+
+.price-copy {
+  padding-top: 2.8rem;
+}
+
+.price-copy h2 {
+  font-family: "The Seasons";
+  color: var(--brand);
+}
+
+.price-list {
+  margin: 0.2rem 0 0.8rem;
+  padding: 0;
+  list-style: none;
+}
+
+.price-list li {
+  padding: 0.3rem 0;
+  font-family: "Montserrat";
+}
+
+.booking-form {
+  background: #fff;
+  border: 1px solid #eceff0;
+  border-radius: var(--radius);
+  padding: 1rem;
+  box-shadow: var(--shadow-md);
+  font-family: "Montserrat";
+}
+
+.booking-form h3 {
+  margin: 0 0 0.6rem;
+  font-size: 1.1rem;
+}
+
+.form-row {
+  display: grid;
+  gap: 0.35rem;
+  margin-bottom: 0.7rem;
+}
+
+input[type="text"],
+input[type="tel"],
+input[type="date"],
+select {
+  border: 1px solid #dfe4e6;
+  border-radius: 10px;
+  padding: 0.65rem 0.75rem;
+  font: inherit;
+  background: #fff;
+  color: var(--text);
+}
+
+input:focus-visible,
+select:focus-visible {
+  outline: 2px solid color-mix(in oklab, var(--brand) 60%, white);
+  outline-offset: 2px;
+}
+
+.form-note {
+  color: #5b6160;
+  font-size: 0.9rem;
+}
+
+.hidden {
+  display: none !important;
+}
+
+@media (min-width: 900px) {
   .pricing-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.2rem;
-    align-items: flex-start;
+    grid-template-columns: 1fr 1fr;
   }
+}
 
-  .price-copy {
-    padding-top: 2.8rem;
-  }
-
-  .price-copy h2 {
-    font-family: "The Seasons";
-    color: var(--brand);
-  }
-
-  .price-list {
-    margin: 0.2rem 0 0.8rem;
-    padding: 0;
-    list-style: none;
-  }
-
-  .price-list li {
-    padding: 0.3rem 0;
-    font-family: "Montserrat";
-  }
-
-  .booking-form {
-    background: #fff;
-    border: 1px solid #eceff0;
-    border-radius: var(--radius);
-    padding: 1rem;
-    box-shadow: var(--shadow-md);
-    font-family: "Montserrat";
-  }
-
-  .booking-form h3 {
-    margin: 0 0 0.6rem;
-    font-size: 1.1rem;
-  }
-
-  .form-row {
-    display: grid;
-    gap: 0.35rem;
-    margin-bottom: 0.7rem;
-  }
-
-  input[type="text"],
-  input[type="tel"],
-  input[type="date"],
-  select {
-    border: 1px solid #dfe4e6;
-    border-radius: 10px;
-    padding: 0.65rem 0.75rem;
-    font: inherit;
-    background: #fff;
-    color: var(--text);
-  }
-
-  input:focus-visible,
-  select:focus-visible {
-    outline: 2px solid color-mix(in oklab, var(--brand) 60%, white);
-    outline-offset: 2px;
-  }
-
-  .form-note {
-    color: #5b6160;
-    font-size: 0.9rem;
-  }
-
-  .hidden {
-    display: none !important;
-  }
-
-  @media (min-width: 900px) {
-    .pricing-grid {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-
-  /* ============================
+/* ============================
           MODAL BOOKING (Versi 2 Kolom)
 ============================= */
 
@@ -1235,8 +1230,8 @@ a {
 
 .hubungi-dekorasi {
   display: block;
-  margin: 0 auto 12px 0; 
-  width: 80px; 
+  margin: 0 auto 12px 0;
+  width: 80px;
   height: auto;
   opacity: 0.9;
 }
@@ -1458,11 +1453,11 @@ a {
 /* Footer */
 .site-footer {
   background-image: url("AMTC - ASSET BG/AMTC - Background Hijau.png");
-  background-size: cover; 
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   border-top: 1px solid #e9eded;
-  width: 100%; 
+  width: 100%;
 }
 
 .brand-footer {
@@ -1477,9 +1472,9 @@ a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  
+
   /* Tetapkan ukuran agar tata letak tidak berantakan, atau bisa dihapus jika ingin mengikuti ukuran asli gambar */
-  width: 85px; 
+  width: 85px;
   height: 85px;
 }
 
@@ -1752,7 +1747,7 @@ a {
   color: var(--brand);
 }
 .wahana-aktifitas {
-  background-color: var(--muted); 
+  background-color: var(--muted);
 }
 
 .wahana-grid {
@@ -1775,14 +1770,14 @@ a {
 }
 
 .wahana-card {
-  background: var(--bg); 
+  background: var(--bg);
   border-radius: var(--radius);
   overflow: hidden;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  display: flex; 
+  display: flex;
   flex-direction: column;
-  padding-bottom: 1.5rem; 
+  padding-bottom: 1.5rem;
 }
 
 .wahana-card:hover {
@@ -1792,7 +1787,7 @@ a {
 
 .card-media {
   position: relative;
-  height: 180px; 
+  height: 180px;
   overflow: hidden;
   margin-bottom: 1rem;
 }
@@ -1847,10 +1842,10 @@ a {
 
 .wahana-dekorasi {
   display: block;
-  margin: 0 auto 12px auto; 
-  width: 80px; 
+  margin: 0 auto 12px auto;
+  width: 80px;
   height: auto;
-  opacity: 0.9; 
+  opacity: 0.9;
 }
 
 @media (max-width: 600px) {
@@ -1858,7 +1853,6 @@ a {
     width: 45px;
   }
 }
-
 
 /* 
   *
@@ -2014,12 +2008,11 @@ a {
 }
 .galeri-dekorasi {
   display: block;
-  margin: 0 auto 12px auto; 
-  width: 80px; 
+  margin: 0 auto 12px auto;
+  width: 80px;
   height: auto;
-  opacity: 0.9; 
+  opacity: 0.9;
 }
-
 
 @media (max-width: 600px) {
   .galeri-dekorasi {
@@ -2112,7 +2105,7 @@ a {
   opacity: 1;
 }
 
-/* Testimoni section (Galeri) */ 
+/* Testimoni section (Galeri) */
 .testimonial-section {
   padding: 50px 0;
   background: #f7f7f7;
@@ -2141,7 +2134,7 @@ a {
 .testimonial-heading2 {
   font-family: "Poppins", sans-serif;
   font-weight: 700;
-  font-size: 2.5rem;  
+  font-size: 2.5rem;
   color: var(--brand);
   margin: 0;
   max-width: 600px;
@@ -2149,57 +2142,55 @@ a {
 
 /* Slider Wrapper (testimoni)*/
 .testimonial-slider {
-    max-width: 800px; 
-    margin-left: auto;
-    margin-right: auto;
-    overflow: hidden;
-    width: 100%;
-    position: relative;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  overflow: hidden;
+  width: 100%;
+  position: relative;
 }
 
 .testimonial-track {
-    display: flex;
-    gap: 20px; 
+  display: flex;
+  gap: 20px;
 }
 
 .testimonial-card {
-    width: calc((100% - 40px) / 3); 
-    max-width: 280px; 
-    height: auto; 
-    flex-shrink: 0;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    background: #fff;
-    position: relative; 
+  width: calc((100% - 40px) / 3);
+  max-width: 280px;
+  height: auto;
+  flex-shrink: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background: #fff;
+  position: relative;
 }
 
 .testimonial-card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; 
-    display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 @media (max-width: 1024px) {
-    .testimonial-card {
-        width: calc((100% - 20px) / 2); 
-    }
+  .testimonial-card {
+    width: calc((100% - 20px) / 2);
+  }
 }
 
 @media (max-width: 768px) {
-    .testimonial-track {
-        justify-content: flex-start; 
-    }
-    
-    .testimonial-card {
-        width: 85vw; 
-        max-width: 300px;
-        height: auto;
-    }
-} 
+  .testimonial-track {
+    justify-content: flex-start;
+  }
 
-
+  .testimonial-card {
+    width: 85vw;
+    max-width: 300px;
+    height: auto;
+  }
+}
 
 /* gambar slider (galeri) */
 .image-slider-section {
@@ -2279,7 +2270,6 @@ a {
     height: 120px;
   }
 }
-
 
 /* 
   *
@@ -2367,7 +2357,7 @@ a {
 
 /* Promo Section */
 .promo-section {
-  background-color: #ffffff; 
+  background-color: #ffffff;
   padding: 100px 20px;
   text-align: center;
 }
@@ -2390,7 +2380,6 @@ a {
   font-size: 1.1rem;
   font-style: italic;
 }
-
 
 /* 
 *
@@ -2475,7 +2464,6 @@ a {
 
 /* Paket (Paket) */
 .paket-section {
-  
   background-color: #f9f9f9;
 }
 
@@ -2537,7 +2525,7 @@ a {
   color: #222;
   margin-top: 2px;
   margin-bottom: 8px;
-  font-family: 'Montserrat';
+  font-family: "Montserrat";
 }
 
 .paket-desc p {
@@ -2548,28 +2536,28 @@ a {
 }
 
 .paket-grid > .paket-card:last-child:nth-child(odd) {
-  grid-column: 1 / -1; 
-  justify-self: center; 
+  grid-column: 1 / -1;
+  justify-self: center;
 }
 
 /* ==== Responsive ==== */
 @media (max-width: 900px) {
   .paket-grid {
-    grid-template-columns: 1fr; 
+    grid-template-columns: 1fr;
   }
 
   .paket-grid > .paket-card:last-child:nth-child(odd) {
-    grid-column: auto; 
+    grid-column: auto;
     justify-self: center;
   }
 }
 
 .paket-dekorasi {
   display: block;
-  margin: 0 auto 12px auto; 
-  width: 80px; 
+  margin: 0 auto 12px auto;
+  width: 80px;
   height: auto;
-  opacity: 0.9; 
+  opacity: 0.9;
 }
 
 @media (max-width: 600px) {
@@ -2577,5 +2565,3 @@ a {
     width: 45px;
   }
 }
-
-

@@ -11,12 +11,12 @@ const loadPromise = new Promise((resolve) => {
 const timerPromise = new Promise((resolve) => {
   setTimeout(() => {
     resolve("timer");
-  }, 600); 
+  }, 600);
 });
 
 // 4. Jalankan Promise.all
 // Ini akan menunggu KEDUA promise selesai
-Promise.all([loadPromise, timerPromise]).then((values) => {
+Promise.all([loadPromise, timerPromise]).then(() => {
   if (preloader) {
     preloader.classList.add("hidden");
   }
@@ -48,18 +48,17 @@ document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener("click", (e) => {
     const target = e.target;
     if (
-  target instanceof HTMLAnchorElement &&
-  target.getAttribute("href")?.startsWith("#") &&
-  target.id !== "open-booking-modal"
-) {
-
+      target instanceof HTMLAnchorElement &&
+      target.getAttribute("href")?.startsWith("#") &&
+      target.id !== "open-booking-modal"
+    ) {
       const id = target.getAttribute("href");
       const el = id ? document.querySelector(id) : null;
       if (el) {
         e.preventDefault();
         el.scrollIntoView({ behavior: "smooth", block: "start" });
 
-        // Close mobile menu after navigate (using optional chaining for safety)
+        // Close mobile menu after navigate
         siteNav?.classList.remove("open");
         siteNav?.querySelector("ul")?.classList.remove("show");
         navToggle?.setAttribute("aria-expanded", "false");
@@ -78,36 +77,27 @@ document.addEventListener("DOMContentLoaded", () => {
   // ===================================
   // 4.1 LOGIKA MODAL BOOKING
   // ===================================
-  const openModalBtns = document.querySelectorAll(".open-booking-trigger"); // <- Perubahan 1: 'Btns' (plural) dan pakai querySelectorAll
-const closeModalBtn = document.getElementById("close-booking-modal");
-const modalOverlay = document.getElementById("booking-modal");
+  const openModalBtns = document.querySelectorAll(".open-booking-trigger");
+  const closeModalBtn = document.getElementById("close-booking-modal");
+  const modalOverlay = document.getElementById("booking-modal");
 
-// 2. UBAH KONDISI 'IF'
-// Cek jika jumlah tombol yang ditemukan lebih dari 0
-if (openModalBtns.length > 0 && closeModalBtn && modalOverlay) { // <- Perubahan 2: Cek .length
-
-  // 3. GUNAKAN LOOP (forEach)
-  // Pasang event listener ke SETIAP tombol yang ditemukan
-  openModalBtns.forEach(btn => { // <- Perubahan 3: Tambahkan loop
-    btn.addEventListener("click", (e) => {
-      e.preventDefault(); // Mencegah link '#' berpindah halaman
-      modalOverlay.classList.add("modal-visible");
-      document.body.style.overflow = "hidden"; // Opsional: Hentikan scroll body
+  if (openModalBtns.length > 0 && closeModalBtn && modalOverlay) {
+    openModalBtns.forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        modalOverlay.classList.add("modal-visible");
+        document.body.style.overflow = "hidden";
+      });
     });
-  });
 
-    // Fungsi untuk menutup modal
     const closeModal = () => {
       modalOverlay.classList.remove("modal-visible");
-      document.body.style.overflow = ""; // Kembalikan scroll body
+      document.body.style.overflow = "";
     };
 
-    // 2. Tutup Modal saat tombol 'X' diklik
     closeModalBtn.addEventListener("click", closeModal);
 
-    // 3. Tutup Modal saat klik di luar area form (di overlay gelap)
     modalOverlay.addEventListener("click", (e) => {
-      // Jika yang diklik adalah overlay-nya, bukan modal-content
       if (e.target === modalOverlay) {
         closeModal();
       }
@@ -115,78 +105,77 @@ if (openModalBtns.length > 0 && closeModalBtn && modalOverlay) { // <- Perubahan
   }
 
   // ===================================
-// 4.2 Booking Form (MODIFIED FOR MODAL)
-// ===================================
-const modalForm = document.getElementById("booking"); // ID form di modal
-modalForm?.addEventListener("submit", (e) => {
-  e.preventDefault(); // Mencegah form submit default
+  // 4.2 Booking Form (MODIFIED FOR MODAL)
+  // ===================================
+  const modalForm = document.getElementById("booking"); // ID form di modal
+  modalForm?.addEventListener("submit", (e) => {
+    e.preventDefault();
 
-  // 1. Ambil data dari form
-  const data = new FormData(modalForm);
-  const nama = String(data.get("nama") || "").trim();
-  const telp = String(data.get("telp") || "").trim();
-  const paket = String(data.get("paket") || "");
-  const lembaga = String(data.get("lembaga") || "").trim();
-  const tanggal = String(data.get("tanggal") || "");
-  const kota = String(data.get("Kota") || "").trim(); 
-  const keperluan = String(data.get("keperluan") || "").trim();
+    const data = new FormData(modalForm);
+    const nama = String(data.get("nama") || "").trim();
+    const telp = String(data.get("telp") || "").trim();
+    const paket = String(data.get("paket") || "");
+    const lembaga = String(data.get("lembaga") || "").trim();
+    const tanggal = String(data.get("tanggal") || "");
+    const kota = String(data.get("Kota") || "").trim();
+    const keperluan = String(data.get("keperluan") || "").trim();
 
-  // 2. Validasi
-  if (!nama || !telp || !paket || !tanggal || !kota || !keperluan) {
-    alert("Mohon lengkapi semua data wajib.");
-    return;
-  }
-  
-  if ((paket === "sekolah" || paket === "travel") && !lembaga) {
+    // Validasi
+    if (!nama || !telp || !paket || !tanggal || !kota || !keperluan) {
+      alert("Mohon lengkapi semua data wajib.");
+      return;
+    }
+
+    if ((paket === "sekolah" || paket === "travel") && !lembaga) {
       alert("Mohon isi Nama Lembaga/Travel.");
       return;
-  }
+    }
 
-  // 3. Tentukan Nomor WhatsApp Tujuan
-  const nomorTujuan = "6287822037779"; 
+    // Nomor WhatsApp Tujuan
+    const nomorTujuan = "6287822037779";
 
-  // 4. Susun Pesan WhatsApp (UPDATE DI SINI)
-  let pesan = `Halo AMTC Teras Lembang, saya ingin booking jadwal manasik.\n\n`;
-  pesan += `*Nama Pemesan:* ${nama}\n`;
-  pesan += `*No. Telepon/WA:* ${telp}\n`;
-  pesan += `*Asal (Kecamatan - Kota):* ${kota}\n`; // Menambahkan Kota
-  pesan += `*Paket Dipilih:* ${paket}\n`;
-  
-  // Tambahkan baris Lembaga HANYA jika paketnya sekolah/travel
-  if ((paket === "sekolah" || paket === "travel") && lembaga) {
-    pesan += `*Nama Lembaga/Travel:* ${lembaga}\n`;
-  }
-  
-  pesan += `*Keperluan yaang ingin disampaikan:* ${keperluan}\n`; // Menambahkan Keperluan
-  pesan += `*Tanggal Kunjungan:* ${tanggal}\n\n`;
-  pesan += `Mohon konfirmasi ketersediaan jadwal. Terima kasih.`;
+    // Susun Pesan WhatsApp
+    let pesan = `Halo AMTC Teras Lembang, saya ingin booking jadwal manasik.\n\n`;
+    pesan += `*Nama Pemesan:* ${nama}\n`;
+    pesan += `*No. Telepon/WA:* ${telp}\n`;
+    pesan += `*Asal (Kecamatan - Kota):* ${kota}\n`;
+    pesan += `*Paket Dipilih:* ${paket}\n`;
 
-  // 5. Encode pesan untuk URL dan buat link WA
-  const pesanTerenkode = encodeURIComponent(pesan);
-  const urlWA = `https://wa.me/${nomorTujuan}?text=${pesanTerenkode}`;
+    if ((paket === "sekolah" || paket === "travel") && lembaga) {
+      pesan += `*Nama Lembaga/Travel:* ${lembaga}\n`;
+    }
 
-  // 6. Buka WhatsApp di tab baru
-  window.open(urlWA, '_blank');
+    pesan += `*Keperluan yaang ingin disampaikan:* ${keperluan}\n`;
+    pesan += `*Tanggal Kunjungan:* ${tanggal}\n\n`;
+    pesan += `Mohon konfirmasi ketersediaan jadwal. Terima kasih.`;
 
-  // 7. Reset form dan tutup modal
-  modalForm.reset();
-  
-  if (typeof toggleModalAdditionalInputs === 'function') {
+    const pesanTerenkode = encodeURIComponent(pesan);
+    const urlWA = `https://wa.me/${nomorTujuan}?text=${pesanTerenkode}`;
+    window.open(urlWA, "_blank");
+
+    // Reset + tutup modal
+    modalForm.reset();
+
+    if (typeof toggleModalAdditionalInputs === "function") {
       toggleModalAdditionalInputs();
-  } else {
-      document.querySelector(".modal-additional-input")?.classList.add("hidden");
-  }
-  
-  const modalOverlay = document.getElementById("booking-modal");
-  modalOverlay.classList.remove("modal-visible"); 
-  document.body.style.overflow = "";
-});
+    } else {
+      document
+        .querySelector(".modal-additional-input")
+        ?.classList.add("hidden");
+    }
+
+    const modalOverlay = document.getElementById("booking-modal");
+    modalOverlay?.classList.remove("modal-visible");
+    document.body.style.overflow = "";
+  });
 
   // ===================================
   // 4.3 Toggle Input Tambahan (MODIFIED FOR MODAL)
   // ===================================
   const modalPaketSelect = document.getElementById("modal-paketSelect");
-  const modalAdditionalInputDiv = document.querySelector(".modal-additional-input");
+  const modalAdditionalInputDiv = document.querySelector(
+    ".modal-additional-input"
+  );
 
   function toggleModalAdditionalInputs() {
     const selectedValue = modalPaketSelect?.value;
@@ -211,138 +200,67 @@ modalForm?.addEventListener("submit", (e) => {
   }
 
   // ===================================
-  // 5. Card Animation (Intersection Observer)
+  // 5 & 6. (DIHAPUS)
+  // - Animasi cards "Kenapa memilih AMTC?" (IntersectionObserver)
+  // - Animasi geser section "Tentang Kami" (IntersectionObserver)
   // ===================================
-  const cards = document.querySelectorAll(".card");
-
-  if (cards.length > 0) {
-    const options = {
-      root: null,
-      threshold: 0.1,
-      rootMargin: "0px",
-    };
-
-    const observer = new IntersectionObserver((entries, observer) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const card = entry.target;
-          card.classList.add("is-visible");
-          observer.unobserve(card);
-        }
-      });
-    }, options);
-
-    cards.forEach((card, index) => {
-      // Atur delay untuk efek staggering
-      card.style.transitionDelay = `${index * 0.2}s`;
-      // (e.g. .card { opacity: 0; transform: translateX(100px); ...})
-      observer.observe(card);
-    });
-  }
-
-  // ===================================
-  //  6. Animasi Bagian Tentang (Slide Kiri & Kanan)
-  // ===================================
-  const aboutCopy = document.querySelector(".about-copy.slide-from-left");
-  const aboutMedia = document.querySelector(".about-media.slide-from-right");
-  const aboutElements = [aboutCopy, aboutMedia].filter((el) => el !== null); // Filter elemen yang ditemukan
-
-  if (aboutElements.length > 0) {
-    const aboutObserverOptions = {
-      root: null,
-      threshold: 0.2,
-      rootMargin: "0px",
-    };
-
-    const aboutObserver = new IntersectionObserver((entries, observer) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const element = entry.target;
-
-          element.classList.add("is-visible");
-
-          observer.unobserve(element);
-        }
-      });
-    }, aboutObserverOptions);
-
-    aboutElements.forEach((element, index) => {
-      if (index === 1) {
-        element.style.transitionDelay = "0.3s";
-      }
-      aboutObserver.observe(element);
-    });
-  }
 
   // ===================================
   // 7. Tombol "Lihat Selengkapnya" (Page Fasilitas)
   // ===================================
-const showMoreBtn = document.getElementById("show-more-btn");
-const hiddenItems = document.querySelectorAll(".wahana-card.hidden-item");
+  const showMoreBtn = document.getElementById("show-more-btn");
+  const hiddenItems = document.querySelectorAll(".wahana-card.hidden-item");
 
-if (showMoreBtn) {
+  if (showMoreBtn) {
     showMoreBtn.addEventListener("click", function () {
-        const isVisible = this.getAttribute("data-visible") === "true";
-        const self = this;
+      const isVisible = this.getAttribute("data-visible") === "true";
+      const self = this;
 
-        if (!isVisible) {
-            
-            self.innerHTML = 'Tutup <i class="fa-solid fa-arrow-up-long"></i>';
-            self.setAttribute("data-visible", "true");
+      if (!isVisible) {
+        self.innerHTML = 'Tutup <i class="fa-solid fa-arrow-up-long"></i>';
+        self.setAttribute("data-visible", "true");
 
-            hiddenItems.forEach((item, index) => {
-                // 1. Ambil duration dari atribut data-aos-duration (default 1000ms)
-                const duration = parseInt(item.getAttribute('data-aos-duration')) || 1000;
-                
-                // 2. Tentukan delay manual untuk efek berurutan
-                const delay = index * 100; // Jeda 100ms antar kartu
-                
-                // 3. Atur display ke 'flex' dan initial state (opacity: 0, translateY: 20px)
-                item.style.display = "flex"; 
-                item.style.opacity = '0';
-                item.style.transform = 'translateY(20px)';
-                
-                // 4. Setelah jeda sangat kecil, picu transisi
-                setTimeout(() => {
-                    // Terapkan transisi dengan duration dan delay yang sudah dihitung
-                    item.style.transition = `opacity ${duration}ms ease-out ${delay}ms, transform ${duration}ms ease-out ${delay}ms`;
-                    
-                    // Pindah ke final state (animasi fade-up)
-                    item.style.opacity = '1';
-                    item.style.transform = 'translateY(0)';
-                    
-                    // 5. Setelah animasi selesai, hapus transisi inline agar tidak mengganggu hover
-                    setTimeout(() => {
-                        item.style.transition = ''; 
-                    }, duration + delay + 50); // Tambah 50ms untuk margin
-                }, 10); // Jeda minimal 10ms
-            });
-            
-            // 6. Scroll ke elemen pertama yang baru muncul
-            const firstNewItem = hiddenItems[0];
-            if (firstNewItem) {
-                firstNewItem.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
+        hiddenItems.forEach((item, index) => {
+          const duration =
+            parseInt(item.getAttribute("data-aos-duration")) || 1000;
+          const delay = index * 100;
 
-        } else {
-            // Logika untuk menyembunyikan
-            hiddenItems.forEach((item) => {
-                item.style.transition = '';
-                item.style.opacity = '';
-                item.style.transform = '';
-                item.style.display = "none";
-            });
-            self.innerHTML =
-                'Lihat Selengkapnya <i class="fa-solid fa-arrow-down-long"></i>';
-            self.setAttribute("data-visible", "false");
+          item.style.display = "flex";
+          item.style.opacity = "0";
+          item.style.transform = "translateY(20px)";
+
+          setTimeout(() => {
+            item.style.transition = `opacity ${duration}ms ease-out ${delay}ms, transform ${duration}ms ease-out ${delay}ms`;
+            item.style.opacity = "1";
+            item.style.transform = "translateY(0)";
+
+            setTimeout(() => {
+              item.style.transition = "";
+            }, duration + delay + 50);
+          }, 10);
+        });
+
+        const firstNewItem = hiddenItems[0];
+        if (firstNewItem) {
+          firstNewItem.scrollIntoView({ behavior: "smooth", block: "start" });
         }
+      } else {
+        hiddenItems.forEach((item) => {
+          item.style.transition = "";
+          item.style.opacity = "";
+          item.style.transform = "";
+          item.style.display = "none";
+        });
+        self.innerHTML =
+          'Lihat Selengkapnya <i class="fa-solid fa-arrow-down-long"></i>';
+        self.setAttribute("data-visible", "false");
+      }
     });
-}
+  }
 
   // ===================================
   // 8. Hero Slider Initialization
   // ===================================
-  // Inisialisasi HeroSlider
   new HeroSlider();
 
   // ===================================
@@ -353,142 +271,122 @@ if (showMoreBtn) {
   const lightboxImg = document.getElementById("lightbox-img");
   const lightboxClose = document.querySelector(".lightbox-close");
 
-  // 1. Fungsi untuk membuka Lightbox
   zoomButtons.forEach((button) => {
     button.addEventListener("click", function (e) {
       e.stopPropagation();
       const imgSrc = this.getAttribute("data-img-src");
-      lightboxImg.src = imgSrc;
-      lightbox.classList.add("active");
+      if (lightboxImg) lightboxImg.src = imgSrc;
+      lightbox?.classList.add("active");
       document.body.style.overflow = "hidden";
     });
   });
 
-  // 2. Fungsi untuk menutup Lightbox (klik tombol X)
-  lightboxClose.addEventListener("click", function () {
-    lightbox.classList.remove("active");
+  lightboxClose?.addEventListener("click", function () {
+    lightbox?.classList.remove("active");
     document.body.style.overflow = "";
   });
 
-  // 3. Fungsi untuk menutup Lightbox (klik di luar gambar)
-  lightbox.addEventListener("click", function (e) {
+  lightbox?.addEventListener("click", function (e) {
     if (e.target === lightbox) {
       lightbox.classList.remove("active");
       document.body.style.overflow = "";
     }
   });
 
-  // 4. Fungsi untuk menutup Lightbox (tekan tombol ESC)
   document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape" && lightbox.classList.contains("active")) {
+    if (e.key === "Escape" && lightbox?.classList.contains("active")) {
       lightbox.classList.remove("active");
       document.body.style.overflow = "";
     }
   });
 
-// =====================================================
-// 10. Testimonial Slider (auto infinite tanpa flash)  
-// =====================================================
-// Testimonial Slider Responsive
-const testiTrack = document.querySelector(".testimonial-track");
-const testiCards = Array.from(testiTrack.children);
-const testiCount = testiCards.length;
+  // =====================================================
+  // 10. Testimonial Slider (auto infinite tanpa flash)
+  // =====================================================
+  const testiTrack = document.querySelector(".testimonial-track");
+  if (testiTrack) {
+    const testiCards = Array.from(testiTrack.children);
+    const testiCount = testiCards.length;
 
-// Gandakan semua card untuk loop halus
-// *** Penting: Lakukan kloning SEBELUM menghitung lebar ***
-testiCards.forEach(card => {
-    const clone = card.cloneNode(true);
-    testiTrack.appendChild(clone);
-});
+    // Clone untuk loop halus
+    testiCards.forEach((card) => {
+      const clone = card.cloneNode(true);
+      testiTrack.appendChild(clone);
+    });
 
-let testiIndex = 0;
-const gap = 20; // sama dengan CSS
+    let testiIndex = 0;
+    const gap = 20;
+    let testiCardWidth =
+      testiTrack.children[0].getBoundingClientRect().width + gap;
 
-// --- MODIFIKASI: Hitung lebar kartu setelah DOM dimuat dan kloning selesai ---
-// Ambil lebar *actual* dari elemen pertama (termasuk kloning)
-let testiCardWidth = testiTrack.children[0].getBoundingClientRect().width + gap; 
-
-// Tambahkan event listener untuk menghitung ulang saat ukuran layar berubah
-function updateCardWidth() {
-    // Memastikan lebar dihitung ulang jika terjadi perubahan ukuran layar (misalnya pada media query)
-    const firstCard = testiTrack.children[0];
-    if (firstCard) {
+    function updateCardWidth() {
+      const firstCard = testiTrack.children[0];
+      if (firstCard) {
         testiCardWidth = firstCard.getBoundingClientRect().width + gap;
-        // Opsional: Atur ulang posisi track ke 0 saat resize untuk menghindari posisi aneh
-        // testiTrack.style.transition = "none";
-        // testiTrack.style.transform = "translateX(0)";
-        // testiIndex = 0;
-    }
-}
-
-// Jalankan saat load dan resize
-window.addEventListener('resize', updateCardWidth);
-window.addEventListener('load', updateCardWidth); 
-
-// --- Jaga fungsi autoSlideTesti tetap sama ---
-function autoSlideTesti() {
-    // Memastikan lebar sudah dihitung
-    if (testiCardWidth === gap) {
-        updateCardWidth(); // Hitung ulang jika lebar kartu belum terdeteksi (misalnya jika image belum load)
+      }
     }
 
-    testiIndex++;
-    testiTrack.style.transition = "transform 0.7s ease-in-out";
-    testiTrack.style.transform = `translateX(${-testiCardWidth * testiIndex}px)`;
+    window.addEventListener("resize", updateCardWidth);
+    window.addEventListener("load", updateCardWidth);
 
-    // Reset jika sudah mencapai loop clone set
-    if (testiIndex >= testiCount) {
+    function autoSlideTesti() {
+      if (testiCardWidth === gap) updateCardWidth();
+
+      testiIndex++;
+      testiTrack.style.transition = "transform 0.7s ease-in-out";
+      testiTrack.style.transform = `translateX(${
+        -testiCardWidth * testiIndex
+      }px)`;
+
+      if (testiIndex >= testiCount) {
         setTimeout(() => {
-            testiTrack.style.transition = "none";
-            testiTrack.style.transform = "translateX(0)";
-            testiIndex = 0;
-        }, 750); // Harus lebih besar dari waktu transisi CSS (0.7s)
+          testiTrack.style.transition = "none";
+          testiTrack.style.transform = "translateX(0)";
+          testiIndex = 0;
+        }, 750);
+      }
     }
-}
 
-// Jalankan otomatis
-setInterval(autoSlideTesti, 3500);
+    setInterval(autoSlideTesti, 3500);
 
-// Kalau window resize → update width
-window.addEventListener("resize", () => {
-    testiCardWidth = testiTrack.children[0].getBoundingClientRect().width + 16;
-});
-
+    window.addEventListener("resize", () => {
+      testiCardWidth =
+        testiTrack.children[0].getBoundingClientRect().width + 16;
+    });
+  }
 
   // ===================================
   // 11. slide (galeri)
   // ===================================
   const track = document.querySelector(".slider-track");
-  const slides = Array.from(track.children);
-  const slideCount = slides.length;
+  if (track) {
+    const slides = Array.from(track.children);
+    const slideCount = slides.length;
 
-  // duplikat semua gambar biar bisa loop tanpa jeda
-  slides.forEach((slide) => {
-    const clone = slide.cloneNode(true);
-    track.appendChild(clone);
-  });
+    slides.forEach((slide) => {
+      const clone = slide.cloneNode(true);
+      track.appendChild(clone);
+    });
 
-  let currentIndex = 0;
-  const slidesPerView = 4; // jumlah gambar yang kelihatan sekaligus
-  const slideWidth = track.children[0].getBoundingClientRect().width + 16; // + margin
+    let currentIndex = 0;
+    const slideWidth = track.children[0].getBoundingClientRect().width + 16;
 
-  function moveSlide() {
-    currentIndex++;
-    track.style.transition = "transform 0.8s ease-in-out";
-    track.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
+    function moveSlide() {
+      currentIndex++;
+      track.style.transition = "transform 0.8s ease-in-out";
+      track.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
 
-    // kalau sudah sampai akhir batch pertama, reset halus
-    if (currentIndex >= slideCount) {
-      setTimeout(() => {
-        track.style.transition = "none";
-        track.style.transform = "translateX(0)";
-        currentIndex = 0;
-      }, 900); // setelah animasi selesai
+      if (currentIndex >= slideCount) {
+        setTimeout(() => {
+          track.style.transition = "none";
+          track.style.transform = "translateX(0)";
+          currentIndex = 0;
+        }, 900);
+      }
     }
+
+    setInterval(moveSlide, 5000);
   }
-
-  setInterval(moveSlide, 5000);
-
 }); // Akhir DOMContentLoaded
 
 // ===================================
@@ -501,12 +399,11 @@ class HeroSlider {
     this.nextBtn = document.querySelector(".next-btn");
     this.currentSlide = 0;
     this.autoPlayInterval = null;
-    this.autoPlayDelay = 5000; // 5 seconds
+    this.autoPlayDelay = 5000;
 
     this.init();
   }
 
-  // Semua method (init, showSlide, nextSlide, dll.)
   init() {
     if (this.slides.length === 0) return;
 
@@ -526,7 +423,7 @@ class HeroSlider {
     slider?.addEventListener("mouseleave", () => this.startAutoPlay());
 
     this.addTouchSupport();
-    this.showSlide(this.currentSlide); // Tampilkan slide pertama
+    this.showSlide(this.currentSlide);
   }
 
   showSlide(index) {
